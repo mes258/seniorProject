@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :email, :password, :password_confirmation
-  
+  has_one :profile
   attr_accessor :password
   before_save :encrypt_password
   

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :profiles
   get 'sessions/new'
   get 'users/new'
   get 'welcome/index'
