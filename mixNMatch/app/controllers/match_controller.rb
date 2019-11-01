@@ -1,3 +1,0 @@
-class MatchController < ApplicationController
-    
-end
