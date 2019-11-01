@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   attr_accessor :email, :password, :password_confirmation
   has_one :profile
+  has_many :user_matches
+  has_many :matches, through: :user_matches, dependent: :destroy
   attr_accessor :password
   before_save :encrypt_password
   

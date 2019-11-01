@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_29_194708) do
+ActiveRecord::Schema.define(version: 2019_11_01_002832) do
 
   create_table "matches", force: :cascade do |t|
     t.integer "profile1_id"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 2019_10_29_194708) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "user_matches", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "match_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["match_id"], name: "index_user_matches_on_match_id"
+    t.index ["user_id"], name: "index_user_matches_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_hash"
@@ -42,4 +51,6 @@ ActiveRecord::Schema.define(version: 2019_10_29_194708) do
   end
 
   add_foreign_key "profiles", "users"
+  add_foreign_key "user_matches", "matches"
+  add_foreign_key "user_matches", "users"
 end

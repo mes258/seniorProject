@@ -1,0 +1,3 @@
+class UserMatchController < ApplicationController
+
+end
