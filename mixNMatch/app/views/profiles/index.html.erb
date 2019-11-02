@@ -17,7 +17,7 @@
   <tbody>
     <% @profiles.each do |profile| %>
       <tr>
-        <td><%= Profile.fullName(profile) %></td>
+        <td><%= profile.fullName %></td>
         <td><%= profile.description %></td>
         <td><%= profile.song %></td>
         <td><%= Profile.preferenceMap(profile.preference) %></td>

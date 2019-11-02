@@ -29,8 +29,8 @@ class Profile < ApplicationRecord
 		end
 	end
 
-	def self.fullName(user)
-		(user.first + " ")+ user.last
+	def fullName
+		"#{first} #{last}"
 	end
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_01_002832) do
+ActiveRecord::Schema.define(version: 2019_11_02_213343) do
 
   create_table "matches", force: :cascade do |t|
     t.integer "profile1_id"
@@ -22,8 +22,6 @@ ActiveRecord::Schema.define(version: 2019_11_01_002832) do
 
   create_table "profiles", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.text "first"
-    t.text "last"
     t.text "description"
     t.string "song"
     t.integer "preference"
@@ -32,6 +30,8 @@ ActiveRecord::Schema.define(version: 2019_11_01_002832) do
     t.integer "priority"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "first"
+    t.string "last"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
