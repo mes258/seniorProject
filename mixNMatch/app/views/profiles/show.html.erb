@@ -2,7 +2,7 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @profiles_controller.fullName(@profile) %>
+  <%= Profile.fullName(@profile) %>
 </p>
 
 <p>
@@ -17,12 +17,12 @@
 
 <p>
   <strong>Preference:</strong>
-  <%= @profiles_controller.preferenceMap(@profile.preference) %>
+  <%= Profile.preferenceMap(@profile.preference) %>
 </p>
 
 <p>
   <strong>Gender:</strong>
-  <%= @profiles_controller.genderMap(@profile.gender) %>
+  <%= Profile.genderMap(@profile.gender) %>
 </p>
 
 <p>

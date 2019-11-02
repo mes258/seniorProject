@@ -17,11 +17,11 @@
   <tbody>
     <% @profiles.each do |profile| %>
       <tr>
-        <td><%= @profiles_controller.fullName(profile) %></td>
+        <td><%= Profile.fullName(profile) %></td>
         <td><%= profile.description %></td>
         <td><%= profile.song %></td>
-        <td><%= @profiles_controller.preferenceMap(profile) %></td>
-        <td><%= @profiles_controller.preferenceMap(gender) %></td>
+        <td><%= Profile.preferenceMap(profile.preference) %></td>
+        <td><%= Profile.genderMap(profile.gender) %></td>
         <td><%= link_to 'Show', profile %></td>
         <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
         <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
