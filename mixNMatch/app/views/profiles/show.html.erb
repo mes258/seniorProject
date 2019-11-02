@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User:</strong>
-  <%= @profile.user_id %>
+  <strong>Name:</strong>
+  <%= @profiles_controller.fullName(@profile) %>
 </p>
 
 <p>
@@ -17,12 +17,12 @@
 
 <p>
   <strong>Preference:</strong>
-  <%= @profile.preference %>
+  <%= @profiles_controller.preferenceMap(@profile.preference) %>
 </p>
 
 <p>
   <strong>Gender:</strong>
-  <%= @profile.gender %>
+  <%= @profiles_controller.genderMap(@profile.gender) %>
 </p>
 
 <p>

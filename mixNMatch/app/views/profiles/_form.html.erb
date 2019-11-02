@@ -11,39 +11,84 @@
     </div>
   <% end %>
 
+  <% if formType == 0 %>
+    <%= form.hidden_field :user_id, :value => current_user.id %>
+    <%= form.hidden_field :value, :value => 1 %>
+    <%= form.hidden_field :priority, :value => 0 %>
+  <% end %>
+
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <strong><%= form.label :first %></strong>
+    <%= form.text_field :first %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
+    <strong><%= form.label :last %></strong>
+    <%= form.text_field :last %>
+  </div>
+
+  <div class="field">
+    <strong><%= form.label :description %></strong>
     <%= form.text_area :description %>
   </div>
 
   <div class="field">
-    <%= form.label :song %>
+    <strong><%= form.label :song %></strong>
     <%= form.text_field :song %>
   </div>
 
   <div class="field">
-    <%= form.label :preference %>
-    <%= form.text_field :preference %>
+    <strong><%= form.label :preference %></strong>
+    <div class="radio" style="margin:1em">
+      <span style="float:left">
+        <%= form.label :preference, 'Straight: '%>
+      </span>
+      <span style="display:block">
+        <%= form.radio_button :preference, 0 %>
+      </span>
+      <span style="float:left">
+        <%= form.label :preference, 'Gay: '%>
+      </span>
+      <span style="display:block">
+        <%= form.radio_button :preference, 1 %>
+      </span>
+      <span style="float:left">
+        <%= form.label :preference, 'Bisexual: ' %>
+      </span>
+      <span style="display:block">
+        <%= form.radio_button :preference, 2 %>
+      </span>
+      <span style="float:left">
+        <%= form.label :preference, 'Pansexual: '%>
+      </span>
+      <span style="display:block">
+        <%= form.radio_button :preference, 3 %>
+      </span>
+    </div>
   </div>
 
   <div class="field">
-    <%= form.label :gender %>
-    <%= form.text_field :gender %>
-  </div>
-
-  <div class="field">
-    <%= form.label :value %>
-    <%= form.text_field :value %>
-  </div>
-
-  <div class="field">
-    <%= form.label :priority %>
-    <%= form.text_field :priority %>
+    <strong><%= form.label :gender %></strong>
+    <div class="radio" style="margin:1em">
+      <span style="float:left">
+        <%= form.label :gender, 'He/Him/His: ' %>
+      </span>
+      <span style="display:block">
+        <%= form.radio_button :gender, 0 %>
+      </span>
+      <span style="float:left">
+        <%= form.label :gender, 'She/Her/Hers: ' %>
+      </span>
+      <span style="display:block">
+        <%= form.radio_button :gender, 1 %>
+      </span>
+      <span style="float:left">
+        <%= form.label :gender, 'They/Them/Theirs: ' %>
+      </span>
+      <span style="display:block">
+        <%= form.radio_button :gender, 2 %>
+      </span>
+    </div>
   </div>
 
   <div class="actions">

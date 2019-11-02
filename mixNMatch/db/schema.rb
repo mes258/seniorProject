@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2019_11_01_002832) do
 
   create_table "profiles", force: :cascade do |t|
     t.integer "user_id", null: false
+    t.text "first"
+    t.text "last"
     t.text "description"
     t.string "song"
     t.integer "preference"
