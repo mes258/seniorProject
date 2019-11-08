@@ -33,3 +33,12 @@
 <br>
 
 <%= link_to 'New Profile', new_profile_path %>
+
+<% @profiles.each do |profile| %>
+  <div class="profile">
+    <h3><%= profile.fullName %></h3><br>
+    <p>
+      <%= profile.description %>
+    </p>
+  </div>
+<% end %>

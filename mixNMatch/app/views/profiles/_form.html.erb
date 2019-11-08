@@ -12,7 +12,7 @@
   <% end %>
 
   <% if formType == 0 %>
-    <%= form.hidden_field :user_id, :value => current_user.id %>
+    <%= form.hidden_field :user_id, :value => @current_user.id %>
     <%= form.hidden_field :value, :value => 1 %>
     <%= form.hidden_field :priority, :value => 0 %>
   <% end %>

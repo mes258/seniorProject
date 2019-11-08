@@ -14,7 +14,11 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/new
   def new
+    if current_user.blank?
+      redirect_to ""
+    end
     @profile = Profile.new
+    @current_user = current_user
   end
 
   # GET /profiles/1/edit
@@ -25,6 +29,7 @@ class ProfilesController < ApplicationController
   # POST /profiles.json
   def create
     @profile = Profile.new(profile_params)
+    @current_user = current_user
     respond_to do |format|
       if @profile.save
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
