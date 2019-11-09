@@ -12,10 +12,23 @@
   <body>
 
   <div id="user_nav">
-  <% if current_user %>
-    Logged in as <%= current_user[:email] %>.
-    <%= link_to "Log out", log_out_path %>
+  <% if current_user %> 
+    <!-- User is logged in:  -->
+    <div style="float: right">
+        <p>
+        <%= link_to "View Profiles", profiles_path %>
+
+        View your profile:
+        <%= link_to 'Show', @profile %> 
+        
+        
+        Logged in as <%= current_user[:email] %>.
+        <%= link_to "Log out", log_out_path %>
+        </p>
+    </div>
+
   <% else %>
+    # User is not logged in.
     <%= link_to "Sign up", sign_up_path %> or
     <%= link_to "log in", log_in_path %>
   <% end %>

@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<div>
+    <% if current_user %>
+        <h2> Your Account </h2>
+        <p>
+            <strong>Email:</strong>
+            <%= current_user[:email] %>
+        </p>
+        <h3> Your Profile </h4>
+        <p>
+            <strong>Description: </strong>
+            <%= @profile[:description] %>
+        <p>
+        <p>
+            <strong>Song: </strong>
+            <%= @profile[:song] %>
+        <p>
+        <p>
+            <strong>Preference: </strong>
+            <%= @profile[:preference] %>
+        <p>
+        <p>
+            <strong>Gender: </strong>
+            <%= @profile[:gender] %>
+        <p>
+        <p>
+            <strong>Value: </strong>
+            <%= @profile[:value] %>
+        <p>
+        <p>
+            <strong>Priority: </strong>
+            <%= @profile[:priority] %>
+        <p>
+
+        <%= link_to 'Edit', edit_profile_path(@profile) %> |
+
+
+    <% end %>
+</div>
