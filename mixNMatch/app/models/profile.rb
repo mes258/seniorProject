@@ -34,4 +34,10 @@ class Profile < ApplicationRecord
 		"#{first} #{last}"
 	end
 
+	def compatible other_profile
+		not_same = id != other_profile.id
+		#list other requirements here
+		return not_same
+	end
+
 end
