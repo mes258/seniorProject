@@ -20,11 +20,17 @@ class MatchesController < ApplicationController
             puts("!!   profiles are compatible")
             existant_match = Match.where(profile1_id: pids.first, profile2_id: pids.second).take
             if existant_match.present?
-                puts "!!   this match exists"
-                puts "!!   ADD USER TO MATCH"
+                # match exists: add user to it
+                existant_match.users << current_user;
+                existant_match.save
             else
-                puts "!!   This match is new"
-                puts "!!   CREATE MATCH AND ADD USER TO MATCH"
+                m = Match.new();
+                m.profile1 = p1;
+                m.profile2 = p2;
+                m.save.to_s; # create match
+                m.users << current_user; # add user once match id exists
+                                         # otherwise errors happen (match does not exist)
+                m.save.to_s; # save user-match connection
             end
             @match_status = "match was successfully created"
         else
