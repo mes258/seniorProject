@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     
     def show
         @current_user ||= User.find(session[:user_id]) if session[:user_id]
-        @profile ||= Profile.find_by(user_id: session[:user_id]) if session[:user_id]
+        @profile ||= Profile.find_by(user: session[:user_id]) if session[:user_id]
     end 
 
     def new
