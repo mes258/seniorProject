@@ -38,55 +38,49 @@
   </div>
 
   <div class="field">
-    <strong><%= form.label :preference %></strong>
-    <div class="radio" style="margin:1em">
-      <span style="float:left">
-        <%= form.label :preference, 'Straight: '%>
-      </span>
-      <span style="display:block">
-        <%= form.radio_button :preference, 0 %>
-      </span>
-      <span style="float:left">
-        <%= form.label :preference, 'Gay: '%>
-      </span>
-      <span style="display:block">
-        <%= form.radio_button :preference, 1 %>
-      </span>
-      <span style="float:left">
-        <%= form.label :preference, 'Bisexual: ' %>
-      </span>
-      <span style="display:block">
-        <%= form.radio_button :preference, 2 %>
-      </span>
-      <span style="float:left">
-        <%= form.label :preference, 'Pansexual: '%>
-      </span>
-      <span style="display:block">
-        <%= form.radio_button :preference, 3 %>
-      </span>
-    </div>
-  </div>
-
-  <div class="field">
     <strong><%= form.label :gender %></strong>
     <div class="radio" style="margin:1em">
       <span style="float:left">
-        <%= form.label :gender, 'He/Him/His: ' %>
+        <%= form.label :gender, 'Male: ' %>
       </span>
       <span style="display:block">
         <%= form.radio_button :gender, 0 %>
       </span>
       <span style="float:left">
-        <%= form.label :gender, 'She/Her/Hers: ' %>
+        <%= form.label :gender, 'Female: ' %>
       </span>
       <span style="display:block">
         <%= form.radio_button :gender, 1 %>
       </span>
       <span style="float:left">
-        <%= form.label :gender, 'They/Them/Theirs: ' %>
+        <%= form.label :gender, 'Non-Binary:' %>
       </span>
       <span style="display:block">
         <%= form.radio_button :gender, 2 %>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <strong><%= form.label :preference %></strong>
+    <div class="radio" style="margin:1em">
+      <span style="float:left">
+        <%= form.label :preference, 'Male:'%>
+      </span>
+      <span style="display:block">
+        <%= form.radio_button :preference, 0 %>
+      </span>
+      <span style="float:left">
+        <%= form.label :preference, 'Female:'%>
+      </span>
+      <span style="display:block">
+        <%= form.radio_button :preference, 1 %>
+      </span>
+      <span style="float:left">
+        <%= form.label :preference, 'Everyone:' %>
+      </span>
+      <span style="display:block">
+        <%= form.radio_button :preference, 2 %>
       </span>
     </div>
   </div>
