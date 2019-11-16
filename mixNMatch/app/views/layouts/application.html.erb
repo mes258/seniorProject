@@ -18,8 +18,8 @@
         <p>
         <%= link_to "View Profiles", profiles_path %>
 
-        <strong> View your profile: </strong>
-        <%= link_to 'users/show' %>
+        <!-- <strong> View your profile: </strong> -->
+        <%= link_to "View your profile", current_user %>
         
         
         Logged in as <%= current_user[:email] %>.

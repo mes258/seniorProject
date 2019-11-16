@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>ID</th>
       <th>User</th>
       <th>Profile1</th>
       <th>profile2 </th>
@@ -16,9 +17,9 @@
     <% @matches.each do |match| %>
       <tr>
         <td><%= match.id %></td>
-        <td><%= match.users %></td>
-        <td><%= match.profile1 %></td>
-        <td><%= match.profile2 %></td>
+        <td><%= match.users.ids %></td>
+        <td><%= match.profile1.first %> <%= match.profile1.last %></td>
+        <td><%= match.profile2.first %> <%= match.profile2.last %></td>
         <td><%= link_to 'Show', match %></td>
         <td><%= link_to 'Edit', edit_match_path(match) %></td>
         <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
