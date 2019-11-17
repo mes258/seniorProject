@@ -1,3 +1,8 @@
+MALE = 0
+FEMALE = 1
+EVERYONE = 2
+NONBINARY = 2
+
 class Profile < ApplicationRecord
   belongs_to :user
   validates :user_id, uniqueness: true
@@ -154,7 +159,7 @@ class Profile < ApplicationRecord
 
     def nonBinaryEveryone other_profile
         # if one of the people is Non-binary (everyone) match always works
-        return gender == 2 && preference == 2 || other_profile.gender == 2 && other_profile.preference == 2
+        return gender == NONBINARY && preference == EVERYONE || other_profile.gender == NONBINARY && other_profile.preference == EVERYONE
     end
 
     def prefMatch other_profile
@@ -164,10 +169,10 @@ class Profile < ApplicationRecord
 
     def prefMatchEveryone other_profile
         # a (b) and b (everyone) or a (everyone) and b (a)
-        if preference == other_profile.gender && other_profile.preference == 2 || preference == 2 && other_profile.preference == gender
+        if preference == other_profile.gender && other_profile.preference == EVERYONE || preference == EVERYONE && other_profile.preference == gender
             return true
         # a (everyone) and b (everyone)
-        elsif preference == 2 && other_profile.preference == 2
+        elsif preference == EVERYONE && other_profile.preference == EVERYONE
             return true
         else 
             return false
@@ -176,30 +181,6 @@ class Profile < ApplicationRecord
 
     def nonBinaryMatch other_profile
         # a (b) and non-binary (a)
-        return preference == other_profile.gender && gender == 2 || other_profile.preference == gender && other_profile.gender == 2
+        return preference == other_profile.gender && gender == NONBINARY || other_profile.preference == gender && other_profile.gender == NONBINARY
     end 
 end
-
-MALE = 0
-FEMALE = 1
-EVERYONE = 2
-NONBINARY = 2
-
-#test the compatibility method
-MM1 = Profile.new
-MM1.id = 1
-MM1.gender = MALE
-MM1.preference = MALE
-
-MM2 = Profile.new
-MM2.id = 2
-MM2.gender = MALE
-MM2.preference = MALE
-
-MF = Profile.new
-MF.id = 3
-MF.gender = MALE
-MF.preference = FEMALE
-
-puts "HELLO"
-puts MM1.compatible MM2
