@@ -1,6 +1,8 @@
 class MatchesController < ApplicationController
     def index
-        @matches = Match.all
+        match1 = Match.all.where(profile1: current_user.profile.id)
+        match2 = Match.all.where(profile2: current_user.profile.id)
+        @matches = match1 | match2
     end
 
     def new
