@@ -1,0 +1,58 @@
+<h1>View Your Match</h1>
+
+<div>
+    <% if @inValid %>
+        <h2> cannot access this page. </h2>
+    <% else %>
+        <p>
+            <strong>match id: </strong>
+            <%= @match[:id] %>
+        </p>
+
+        <p>
+            <strong>profile1 id: </strong>
+            <%= @profile1[:id] %>
+
+            <strong>profile2 id: </strong>
+            <%= @profile2[:id] %>
+        </p>
+
+
+        <p>
+            <h3> Other Profile </h4>
+            <p>
+                <strong>Name:</strong>
+                <%= @otherProfile.fullName() %>
+            </p>
+            <p>
+                <strong>Description: </strong>
+                <%= @otherProfile[:description] %>
+            </p>
+            <p>
+                <strong>Song: </strong>
+                <%= @otherProfile[:song] %>
+            </p>
+            <p>
+                <strong>Preference: </strong>
+                <%= Profile.preferenceMap(@otherProfile.preference) %>
+            </p>
+            <p>
+                <strong>Gender: </strong>
+                <%= Profile.genderMap(@otherProfile.gender) %>
+            </p>
+            <p>
+                <strong>Value: </strong>
+                <%= @otherProfile[:value] %>
+            </p>
+            <p>
+                <strong>Priority: </strong>
+                <%= @otherProfile[:priority] %>
+            </p>
+        </p>
+    <% end %>
+
+
+
+</div>
+
+<%= link_to 'Back', matches_path %>

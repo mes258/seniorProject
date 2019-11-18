@@ -20,12 +20,12 @@
             <p>
             <p>
                 <strong>Preference: </strong>
-                <%= @profile[:preference] %>
-            <p>
+                <%= Profile.preferenceMap(@profile.preference) %>
+            </p>
             <p>
                 <strong>Gender: </strong>
-                <%= @profile[:gender] %>
-            <p>
+                <%= Profile.genderMap(@profile.gender) %>
+            </p>
             <p>
                 <strong>Value: </strong>
                 <%= @profile[:value] %>

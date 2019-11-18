@@ -5,6 +5,26 @@ class MatchesController < ApplicationController
         @matches = match1 | match2
     end
 
+    def show
+        @inValid = true;
+        @match ||= Match.find_by(id: params[:id])
+        if @match
+            @profile1 ||= Profile.find_by(id: @match[:profile1_id])
+            @profile2 ||= Profile.find_by(id: @match[:profile2_id])
+            if @profile1 == current_user.profile || @profile2 == current_user.profile
+                @inValid = false
+                puts("should not be invalid")
+            end
+            if @profile1 == current_user.profile
+                puts("should be profile2")
+                @otherProfile = @profile2
+            elsif @profile2 == current_user.profile
+                @otherProfile = @profile1
+                puts("should be profile 1")
+            end
+        end 
+    end 
+
     def new
         @match = Match.new
     end 
