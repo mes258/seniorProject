@@ -49,6 +49,7 @@ class MatchesController < ApplicationController
                 m = Match.new();
                 m.profile1 = p1;
                 m.profile2 = p2;
+                m.status = 0;
                 m.save.to_s; # create match
                 m.users << current_user; # add user once match id exists
                                          # otherwise errors happen (match does not exist)
