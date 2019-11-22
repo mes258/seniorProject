@@ -81,5 +81,11 @@ class MatchesController < ApplicationController
     def match_params
         params.require(:match).permit(:match_id, :profile1_id, :profile2_id)
     end
+
+    def update_status
+        #@match = Match.find(params[:id])
+        #@newStatus = params[:status]
+        Match.where(id: params[:id]).update_all(status: params[:status])
+    end
 end
 

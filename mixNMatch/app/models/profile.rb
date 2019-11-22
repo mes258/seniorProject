@@ -129,7 +129,6 @@ class Profile < ApplicationRecord
 
 
     def compatible other_profile
-
         # puts "Other profile info: "
         # puts "ID: "
         # puts other_profile.id

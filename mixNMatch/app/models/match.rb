@@ -15,6 +15,6 @@ class Match < ApplicationRecord
     else
         "Not set"
     end
-end
+  end
 
 end

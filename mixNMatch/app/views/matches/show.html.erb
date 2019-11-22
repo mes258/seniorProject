@@ -5,21 +5,12 @@
         <h2> cannot access this page. </h2>
     <% else %>
         <p>
-            <strong>match id: </strong>
-            <%= @match[:id] %>
-        </p>
+            <strong> match status: </strong>
+            <%= Match.statusMap(@match[:status]) %>
+        </p
 
         <p>
-            <strong>profile1 id: </strong>
-            <%= @profile1[:id] %>
-
-            <strong>profile2 id: </strong>
-            <%= @profile2[:id] %>
-        </p>
-
-
-        <p>
-            <h3> Other Profile </h4>
+            <h3> <%= @otherProfile.first %>'s Profile </h4>
             <p>
                 <strong>Name:</strong>
                 <%= @otherProfile.fullName() %>
@@ -49,6 +40,9 @@
                 <%= @otherProfile[:priority] %>
             </p>
         </p>
+        <%= link_to 'Accept Match', matches_update_status_path(:id => @match.id, :status => 1), class:"button is-danger", remote: true %>
+        <%= link_to 'Reject Match', matches_update_status_path(:id => @match.id, :status => 2), class:"button is-danger", remote: true %>
+
     <% end %>
 
 
