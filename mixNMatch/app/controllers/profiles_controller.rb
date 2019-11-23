@@ -1,4 +1,6 @@
 class ProfilesController < ApplicationController
+  include ProfilesHelper
+
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
   # GET /profiles
@@ -33,6 +35,8 @@ class ProfilesController < ApplicationController
     @current_user = current_user
     respond_to do |format|
       if @profile.save
+				uploaded_pic = params[:profile][:picture]
+        uploadToBucket(Rails.root.join('public', 'uploads', uploaded_pic_filename))
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else
@@ -74,6 +78,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:user_id, :first, :last, :description, :song, :preference, :gender, :value, :priority)
+      params.require(:profile).permit(:user_id, :first, :last, :picture, :description, :song, :preference, :gender, :value, :priority)
     end
 end
