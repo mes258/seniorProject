@@ -7,7 +7,7 @@ CRED_PATH = "../../../credentials.csv"
 
 module ProfilesHelper
 
-	def setCredentials():
+	def setCredentials()
     CSV.read(CRED_PATH)
     creds = CSV.read(CRED_PATH)
     aws_id = creds[1][2]
@@ -17,7 +17,7 @@ module ProfilesHelper
     })
   end
 
-  def uploadToBucket(path, id):
+  def uploadToBucket(path, id)
     setCredentials()
     s3 = Aws::S3::Resource.new(region: REGION)
     bucket = s3.bucket(BUCKET_NAME)
@@ -36,7 +36,7 @@ module ProfilesHelper
     end
   end
 
-  def getURL(key):
+  def getURL(key)
     return "https://mixnmatch-profiles.s3-us-west-2.amazonaws.com/#{key}"
   end
 
