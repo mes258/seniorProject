@@ -36,9 +36,9 @@ class Profile < ApplicationRecord
 	def fullName
 		"#{first} #{last}"
     end
-    
- 
-    # START All Possible matches: 
+
+
+    # START All Possible matches:
         # male (male) to male (male)
         # male (male) to male (everyone)
         # male (male) to non-binary (male)
@@ -87,13 +87,13 @@ class Profile < ApplicationRecord
 
     #END ALL POSSIBLE MATCHES
 
-    # START All unique pairs: 
-        # Between Male and Male: 
+    # START All unique pairs:
+        # Between Male and Male:
             # male (male) and male (male) DONE - prefMatch
             # male (male) and male (everyone) DONE - prefMatchEveryone
             # male (everyone) and male (everyone) DONE - prefMatchEveryone
 
-        # Between Male and Female: 
+        # Between Male and Female:
             # male (female) and female (male) DONE - prefMatch
             # male (female) and female (everyone) DONE - prefMatchEveryone
             # male (everyone) and female (male) DONE - prefMatchEveryone
@@ -107,7 +107,7 @@ class Profile < ApplicationRecord
             # male (everyone) and non-binary (male) DONE - prefMatchEveryone
             # male (everyone) and non-binary (everyone) DONE - nonBinaryEveryone
 
-        # Between Female and Female: 
+        # Between Female and Female:
             # female (female) and female (female) DONE - prefMatch
             # female (female) and female (everyone) DONE - prefMatchEveryone
             # female (everyone) and female (everyone) DONE - prefMatchEveryone
@@ -139,7 +139,7 @@ class Profile < ApplicationRecord
 
         #make sure profiles are different
         not_same = id != other_profile.id
-        #check if compatiable 
+        #check if compatiable
         if not_same
             if nonBinaryEveryone other_profile
                 return true
@@ -151,8 +151,8 @@ class Profile < ApplicationRecord
                 return true
             else
                 return false
-            end 
-        end 
+            end
+        end
         return not_same
     end
 
@@ -173,13 +173,18 @@ class Profile < ApplicationRecord
         # a (everyone) and b (everyone)
         elsif preference == EVERYONE && other_profile.preference == EVERYONE
             return true
-        else 
+        else
             return false
-        end 
-    end 
+        end
+    end
 
     def nonBinaryMatch other_profile
         # a (b) and non-binary (a)
         return preference == other_profile.gender && gender == NONBINARY || other_profile.preference == gender && other_profile.gender == NONBINARY
-    end 
+    end
+
+		def getPicture
+			return "https://mixnmatch-profiles.s3-us-west-2.amazonaws.com/#{pictureID}"
+		end
+
 end

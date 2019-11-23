@@ -1,7 +1,44 @@
+require 'aws-sdk'
+require 'csv'
+
+BUCKET_NAME = "mixnmatch-profiles"
+REGION = "us-west-2a"
+CRED_PATH = "../../../credentials.csv"
+
 class ProfilesController < ApplicationController
-  include ProfilesHelper
 
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+
+  helper_method :uploadToBucket
+  def uploadToBucket(picture)
+    if picture != nil
+      puts(picture)
+      file = Rails.root.join('public', 'uploads', picture.filename)
+      CSV.read(CRED_PATH)
+      creds = CSV.read(CRED_PATH)
+      aws_id = creds[1][2]
+      aws_secret = creds[1][3]
+      Aws.config.update({
+        credentials: Aws::Credentials.new(aws_id, aws_secret)
+      })
+      s3 = Aws::S3::Resource.new(region: REGION)
+      bucket = s3.bucket(BUCKET_NAME)
+      if bucket.exists?
+        key = "profile_"+@current_user.id.to_s
+        # Check if file is already in the bucket
+        if bucket.object(key).exists?
+          puts "#{key} already exists in the bucket, overwriting..."
+        end
+        obj = s3.bucket(BUCKET_NAME).object(key)
+        obj.upload_file(file, acl: 'public-read')
+        puts "Uploaded #{key} to S3 under #{obj.public_url}"
+        return key
+      else
+        puts "Unable to find #{BUCKET_NAME}"
+      end
+    end
+    return "default"
+  end
 
   # GET /profiles
   # GET /profiles.json
@@ -35,8 +72,6 @@ class ProfilesController < ApplicationController
     @current_user = current_user
     respond_to do |format|
       if @profile.save
-				uploaded_pic = params[:profile][:picture]
-        uploadToBucket(Rails.root.join('public', 'uploads', uploaded_pic_filename))
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else
@@ -78,6 +113,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:user_id, :first, :last, :picture, :description, :song, :preference, :gender, :value, :priority)
+      params.require(:profile).permit(:user_id, :first, :last, :pictureID, :description, :song, :preference, :gender, :value, :priority)
     end
 end

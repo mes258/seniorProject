@@ -9,7 +9,13 @@
         </p>
         <% if profile %>
 
-            <h3> Your Profile </h4>
+            <h3> Your Profile </h3>
+
+			<p>
+              <%= puts(@profile.getPicture()) %>
+			  <%= image_tag(@profile.getPicture()) %>
+			</p>
+
             <p>
                 <strong>Description: </strong>
                 <%= @profile[:description] %>
