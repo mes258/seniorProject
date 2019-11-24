@@ -10,6 +10,10 @@
   <div class="profile">
     <h3><%= profile.fullName %></h3><br>
     <p>
+      <%= puts(profile.getPicture()) %>
+      <%= image_tag(profile.getPicture()) %>
+    </p>
+    <p>
       <%= profile.id %>
       <%= profile.description %>
     </p>

@@ -2,8 +2,8 @@ require 'aws-sdk'
 require 'csv'
 
 BUCKET_NAME = "mixnmatch-profiles"
-REGION = "us-west-2a"
-CRED_PATH = "../../../credentials.csv"
+REGION = "us-west-2"
+CRED_PATH = "../credentials.csv"
 
 class ProfilesController < ApplicationController
 
@@ -35,7 +35,7 @@ class ProfilesController < ApplicationController
       s3 = Aws::S3::Resource.new(region: REGION)
       bucket = s3.bucket(BUCKET_NAME)
       if bucket.exists?
-        key = "profile_"+@current_user.id.to_s
+        key = "profile_"+current_user.id.to_s
         # Check if file is already in the bucket
         if bucket.object(key).exists?
           puts "#{key} already exists in the bucket, overwriting..."
@@ -97,6 +97,9 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
+
+    @profile.pictureID = uploadToBucket params[:profile][:picture]
+
     respond_to do |format|
       if @profile.update(profile_params)
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
@@ -127,6 +130,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:user_id, :first, :last, :pictureID, :description, :song, :preference, :gender, :value, :priority)
+      params.require(:profile).permit(:user_id, :first, :last, :pictureID, :picture, :description, :song, :preference, :gender, :value, :priority)
     end
 end
