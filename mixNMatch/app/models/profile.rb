@@ -6,6 +6,11 @@ NONBINARY = 2
 class Profile < ApplicationRecord
   belongs_to :user
   validates :user_id, uniqueness: true
+	attr_accessor :picture
+
+	def getPicture
+		return self.picture
+	end
 
 	def self.preferenceMap(val)
 		case val

@@ -9,11 +9,22 @@ class ProfilesController < ApplicationController
 
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
-  helper_method :uploadToBucket
+  # #app/controllers/profiles_controller.rb
+  # def wrap_upload
+  #   respond_to do |format|
+  #     format.js
+  #   end
+  # end
+  #
+  # #app/view/profiles_controller/uploadToBucket.js
+  # alert("<%= form.hidden_field :pictureID, :value => uploadToBucket(params[@picture]) %>");
+  #
+  # helper_method :uploadToBucket
   def uploadToBucket(picture)
+    puts("I was called")
     if picture != nil
       puts(picture)
-      file = Rails.root.join('public', 'uploads', picture.filename)
+      file = Rails.root.join('public', 'uploads', picture)
       CSV.read(CRED_PATH)
       creds = CSV.read(CRED_PATH)
       aws_id = creds[1][2]
@@ -39,6 +50,8 @@ class ProfilesController < ApplicationController
     end
     return "default"
   end
+
+
 
   # GET /profiles
   # GET /profiles.json
@@ -108,6 +121,7 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
+      params[:pictureID] = uploadToBucket(params[:picture])
       @profile = Profile.find(params[:id])
     end
 

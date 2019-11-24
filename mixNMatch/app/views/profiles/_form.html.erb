@@ -19,9 +19,9 @@
 
 	<div class="field">
 		<strong><%= form.label :"Profile Picture" %></strong>
-		<%= form.file_field :picture %>
-    <%= form.hidden_field :pictureID, :value => uploadToBucket(params[:picture]) %>
+		<%= form.file_field 'picture' %>
 	</div>
+
 
   <div class="field">
     <strong><%= form.label :first %></strong>
