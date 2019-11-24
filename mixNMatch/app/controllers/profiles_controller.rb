@@ -8,17 +8,7 @@ CRED_PATH = "../credentials.csv"
 class ProfilesController < ApplicationController
 
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
-
-  # #app/controllers/profiles_controller.rb
-  # def wrap_upload
-  #   respond_to do |format|
-  #     format.js
-  #   end
-  # end
-  #
-  # #app/view/profiles_controller/uploadToBucket.js
-  # alert("<%= form.hidden_field :pictureID, :value => uploadToBucket(params[@picture]) %>");
-  #
+  
   # helper_method :uploadToBucket
   def uploadToBucket(picture)
     puts("I was called")
