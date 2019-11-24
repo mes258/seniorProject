@@ -8,7 +8,7 @@ CRED_PATH = "../credentials.csv"
 class ProfilesController < ApplicationController
 
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
-  
+
   # helper_method :uploadToBucket
   def uploadToBucket(picture)
     puts("I was called")
@@ -73,6 +73,9 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_params)
     @current_user = current_user
+
+    @profile.pictureID = uploadToBucket params[:profile][:picture]
+
     respond_to do |format|
       if @profile.save
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }

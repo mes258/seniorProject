@@ -36,7 +36,7 @@ class Profile < ApplicationRecord
 
 	def fullName
 		"#{first} #{last}"
-    end
+	end
 
 
     # START All Possible matches:
@@ -184,8 +184,8 @@ class Profile < ApplicationRecord
         return preference == other_profile.gender && gender == NONBINARY || other_profile.preference == gender && other_profile.gender == NONBINARY
     end
 
-	def getPicture
-		return "https://mixnmatch-profiles.s3-us-west-2.amazonaws.com/#{pictureID}"
-	end
+		def getPicture
+			return "https://mixnmatch-profiles.s3-us-west-2.amazonaws.com/#{pictureID}"
+		end
 
 end
