@@ -6,19 +6,22 @@
   <%= @match_status %>
 <% end %>
 
-<% @profiles.each do |profile| %>
-  <div class="profile">
-    <h3><%= profile.fullName %></h3><br>
-    <p>
-      <%= puts(profile.getPicture()) %>
-      <%= image_tag(profile.getPicture()) %>
-    </p>
-    <p>
-      <%= profile.id %>
-      <%= profile.description %>
-    </p>
-  </div>
-<% end %>
-
 <%= render 'matches/form', match: Match.new %>
+
+<div class="profiles_grid">
+  <% @profiles.each do |profile| %>
+    <div class="profile">
+      <div class="center">
+          <br>
+          <h3><%= profile.first %></h3>
+          <%= image_tag(profile.getPicture()) %>
+      </div>
+      
+      <p>
+        <%= profile.id %>
+        <%= profile.description %>
+      </p>
+    </div>
+  <% end %>
+</div>
 

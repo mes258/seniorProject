@@ -2,8 +2,47 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// this stuff makes the grid adjust to different screen sizes
+.profiles_grid{
+  float:left;
+  padding: 3.75%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-column-gap: 0;
+  grid-row-gap: 20px;
+}
+@media only screen and (min-width: 640px) {
+  .profiles_grid {
+    grid-template-columns: 47.5% 47.5%;
+    grid-column-gap: 5%;
+    grid-row-gap: 40px;
+  }
+}
+@media only screen and (min-width: 981px) {
+  .profiles_grid {
+    grid-template-columns: 30% 30% 30%;
+    grid-column-gap: 5%;
+    grid-row-gap: 50px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .profiles_grid {
+    grid-template-columns: 21.25% 21.25% 21.25% 21.25%;
+    grid-column-gap: 5%;
+    grid-row-gap: 50px;
+  }
+}
+
 .profile{
-  background-color: lightgray;
+  background-color: lightgreen;
+  border-radius: 10px;
   color: darkblue;
-  width: 30vw;
+}
+
+.center{
+  text-align: center;
+}
+
+img {
+  height: 200px;
 }
