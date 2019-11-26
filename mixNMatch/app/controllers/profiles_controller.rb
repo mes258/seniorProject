@@ -9,19 +9,41 @@ class ProfilesController < ApplicationController
 
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
-  # helper_method :uploadToBucket
+	def getCreds
+    puts("set credentials")
+    CSV.read(CRED_PATH)
+    creds = CSV.read(CRED_PATH)
+    aws_id = creds[1][2]
+    aws_secret = creds[1][3]
+    Aws.config.update({
+      credentials: Aws::Credentials.new(aws_id, aws_secret)
+    })
+  end
+
+	def deleteFromBucket(key)
+		if key != nil
+      getCreds
+			s3 = Aws::S3::Resource.new(region: REGION)
+			bucket = s3.bucket(BUCKET_NAME)
+			if bucket.exists?
+				# Check if file is already in the bucket
+				if bucket.object(key).exists?
+          obj = s3.bucket(BUCKET_NAME).object(key)
+  				obj.delete()
+					puts "#{key} deleted, overwriting..."
+				end
+			else
+				puts "Unable to find #{BUCKET_NAME}"
+			end
+		end
+    @profile.pictureID = "default"
+		return @profile.pictureID
+	end
+
   def uploadToBucket(picture)
-    puts("I was called")
     if picture != nil
-      puts(picture)
       file = Rails.root.join('public', 'uploads', picture)
-      CSV.read(CRED_PATH)
-      creds = CSV.read(CRED_PATH)
-      aws_id = creds[1][2]
-      aws_secret = creds[1][3]
-      Aws.config.update({
-        credentials: Aws::Credentials.new(aws_id, aws_secret)
-      })
+      getCreds
       s3 = Aws::S3::Resource.new(region: REGION)
       bucket = s3.bucket(BUCKET_NAME)
       if bucket.exists?
@@ -29,6 +51,8 @@ class ProfilesController < ApplicationController
         # Check if file is already in the bucket
         if bucket.object(key).exists?
           puts "#{key} already exists in the bucket, overwriting..."
+          obj = s3.bucket(BUCKET_NAME).object(key)
+          obj.delete()
         end
         obj = s3.bucket(BUCKET_NAME).object(key)
         obj.upload_file(file, acl: 'public-read')
@@ -107,6 +131,7 @@ class ProfilesController < ApplicationController
   # DELETE /profiles/1
   # DELETE /profiles/1.json
   def destroy
+    deleteFromBucket(@profile.pictureID)
     @profile.destroy
     respond_to do |format|
       format.html { redirect_to profiles_url, notice: 'Profile was successfully destroyed.' }
@@ -117,7 +142,6 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      params[:pictureID] = uploadToBucket(params[:picture])
       @profile = Profile.find(params[:id])
     end
 
