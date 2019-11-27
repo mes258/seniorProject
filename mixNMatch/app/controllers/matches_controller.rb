@@ -27,7 +27,11 @@ class MatchesController < ApplicationController
 
     def new
         @match = Match.new
-    end 
+    end
+
+    def index
+        @matches = Match.all
+    end
 
     def create
         
@@ -42,9 +46,14 @@ class MatchesController < ApplicationController
             puts("!!   profiles are compatible")
             existant_match = Match.where(profile1_id: pids.first, profile2_id: pids.second).take
             if existant_match.present?
-                # match exists: add user to it
-                existant_match.users << current_user;
-                existant_match.save
+                # match exists: add user to it, unless they already made this match
+                if existant_match.users.include?(current_user)
+                    @match_status = "you have already made this match"
+                else
+                    existant_match.users << current_user;
+                    existant_match.save
+                    @match_status = "match was successfully created"
+                end
             else
                 m = Match.new();
                 m.profile1 = p1;
@@ -54,8 +63,8 @@ class MatchesController < ApplicationController
                 m.users << current_user; # add user once match id exists
                                          # otherwise errors happen (match does not exist)
                 m.save.to_s; # save user-match connection
+                @match_status = "match was successfully created"
             end
-            @match_status = "match was successfully created"
         else
             puts("!!   profiles are not compatible")
             @match_status = "match was not compatible"

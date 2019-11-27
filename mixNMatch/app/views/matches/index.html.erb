@@ -18,9 +18,9 @@
     <% @matches.each do |match| %>
       <tr>
         <!--<td><%= match.id %></td>-->
-        <td><%= match.users.ids.count %></td>
-        <td><%= match.profile1.first %> <%= match.profile1.last %></td>
-        <td><%= match.profile2.first %> <%= match.profile2.last %></td>
+        <td><%= match.user_matches.count %></td>
+        <td>[<%= match.profile1.id %>]<%= match.profile1.first %></td>
+        <td>[<%= match.profile2.id %>]<%= match.profile2.first %></td>
         <td><%= Match.statusMap(match.status) %><td>
         <td><%= link_to 'Show Match Info', match %></td>
         <!-- <td><%= link_to 'Edit', edit_match_path(match) %></td> -->
