@@ -1,16 +1,43 @@
-<h1>Log In </h1>
+<head>
+  <link rel="stylesheet" href="assets/fontAwesome.css">
+</head>
 
-<%= form_tag sessions_path do %>
-  <p>
-    <%= label_tag :email %><br />
-    <%= text_field_tag :email, params[:email] %>
-  </p>
-  <p>
-    <%= label_tag :password %><br />
-    <%= password_field_tag :password %>
-  </p>
-  <p class="button"><%= submit_tag "Log in" %></p>
-  <%= link_to "Create an account", sign_up_path %>
+<body>
+  <h1>Log In </h1>
 
-<% end %>
 
+  <div class="banner">
+    <%= form_tag sessions_path do %>
+      <p>
+        <%= label_tag :email %><br />
+        <%= text_field_tag :email, params[:email] %>
+      </p>
+      <p>
+        <%= label_tag :password %><br />
+        <%= password_field_tag :password %>
+      </p>
+      <p class="button"><%= submit_tag "Log in" %></p>
+      <%= link_to "Create an account", sign_up_path %>
+
+    <% end %>
+  </div>
+
+</body>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <ul>
+          <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+          <li><a href="https://www.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
+          <li><a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a></li>
+        </ul>
+        <p>Copyright &copy; 2019 Mix N' Match
+
+                | Coded by: Vincent, Michael, and Griffin
+      </div>
+    </div>
+  </div>
+</footer>
