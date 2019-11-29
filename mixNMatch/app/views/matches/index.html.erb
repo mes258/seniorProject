@@ -1,15 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Matches</h1>
-
+<h1>Your Matches</h1>
+we should update this to use the same profile format as the profiles index<br><br><br>
 <table>
   <thead>
     <tr>
       <!--<th>ID</th>-->
-      <th>Number of Matchers</th>
-      <th>Profile1</th>
-      <th>profile2 </th>
-      <th>Status </th>
+      <th>#</th>
+      <th>profile</th>
+      <th>Status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,17 +18,15 @@
       <tr>
         <!--<td><%= match.id %></td>-->
         <td><%= match.user_matches.count %></td>
-        <td>[<%= match.profile1.id %>]<%= match.profile1.first %></td>
-        <td>[<%= match.profile2.id %>]<%= match.profile2.first %></td>
-        <td><%= Match.statusMap(match.status) %><td>
+        <%if match.profile2.id == @your_profile.id%>
+          <td><%= match.profile1.first %></td>
+          <td><%= Match.statusMap(match.status2) %></td>
+        <%else%>
+          <td><%= match.profile2.first %></td>
+          <td><%= Match.statusMap(match.status1) %></td>
+        <%end%>
         <td><%= link_to 'Show Match Info', match %></td>
-        <!-- <td><%= link_to 'Edit', edit_match_path(match) %></td> -->
-        <!-- <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New match', new_match_path %>

@@ -7,7 +7,7 @@
         <p>
             <strong> match status: </strong>
             <%= Match.statusMap(@match[:status]) %>
-        </p
+        </p>
 
         <p>
             <h3> <%= @otherProfile.first %>'s Profile </h4>
@@ -40,8 +40,13 @@
                 <%= @otherProfile[:priority] %>
             </p>
         </p>
-        <%= link_to 'Accept Match', matches_update_status_path(:id => @match.id, :status => 1), class:"button is-danger", remote: true %>
-        <%= link_to 'Reject Match', matches_update_status_path(:id => @match.id, :status => 2), class:"button is-danger", remote: true %>
+        <%if @otherProfile.id == @match.profile2.id%>
+            <%= link_to 'Accept Match', matches_update_status_path(:match => {:id => @match.id, :status1 => 1}), class:"button is-danger", remote: false %>
+            <%= link_to 'Reject Match', matches_update_status_path(:match => {:id => @match.id, :status1 => 2}), class:"button is-danger", remote: false %>
+        <%else%>
+            <%= link_to 'Accept Match', matches_update_status_path(:match => {:id => @match.id, :status2 => 1}), class:"button is-danger", remote: false %>
+            <%= link_to 'Reject Match', matches_update_status_path(:match => {:id => @match.id, :status2 => 2}), class:"button is-danger", remote: false %>
+        <%end%>
 
     <% end %>
 

@@ -29,8 +29,10 @@ class MatchesController < ApplicationController
         @match = Match.new
     end
 
+    # show only matches which the current user is a party of
     def index
-        @matches = Match.all
+        @matches = Match.where("profile1_id = ? OR profile2_id = ?", current_user.profile.id, current_user.profile.id)
+        @your_profile = current_user.profile
     end
 
     def create
@@ -75,26 +77,22 @@ class MatchesController < ApplicationController
             format.html { render "profiles/index" }
         end
 
-        #respond_to do |format|
-        #    if @match.save
-        #        format.html { redirect_to @match, notice: 'Match was successfully created.' }
-        #        format.json { render :show, status: :created, location: @match }
-        #    else
-        #        format.html { render :profiles }
-        #        format.json { render json: @match.errors, status: :unprocessable_entity }
-        #    end
-        #end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def match_params
-        params.require(:match).permit(:match_id, :profile1_id, :profile2_id)
+        params.require(:match).permit(:match_id, :profile1_id, :profile2_id, :status1, :status2)
     end
 
     def update_status
-        #@match = Match.find(params[:id])
-        #@newStatus = params[:status]
-        Match.where(id: params[:id]).update_all(status: params[:status])
+        @match = Match.find(params[:match][:id])
+        if @match.update(match_params)
+            @matches = Match.where("profile1_id = ? OR profile2_id = ?", current_user.profile.id, current_user.profile.id)
+            @your_profile = current_user.profile
+            render "index"
+        else
+            render "view"
+        end
     end
 end
 
