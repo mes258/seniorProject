@@ -10,14 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_23_210118) do
+ActiveRecord::Schema.define(version: 2019_11_30_183721) do
 
   create_table "matches", force: :cascade do |t|
     t.integer "profile1_id"
     t.integer "profile2_id"
-    t.integer "status"
+    t.integer "status1"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status2"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 2019_11_23_210118) do
     t.string "password_salt"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "score", default: 0
   end
 
   add_foreign_key "profiles", "users"

@@ -16,15 +16,16 @@
     <!-- User is logged in:  -->
     <div style="float: right">
         <p>
-        <%= link_to "View Profiles", profiles_path %>
-
-        <%= link_to "View Matches", matches_path %>
-
+        <%= link_to "Make Matches", profiles_path %>
+        |
+        <%= link_to "My Matches", matches_path %>
+        |
         <!-- <strong> View your profile: </strong> -->
-        <%= link_to "View your profile", current_user %>
+        <%= link_to "My Account", current_user %>
+        |
         
-        
-        Logged in as <%= current_user[:email] %>.
+        Logged in as <%= current_user[:email] %>
+        |
         <%= link_to "Log out", log_out_path %>
         </p>
     </div>

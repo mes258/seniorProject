@@ -4,6 +4,8 @@
     <% if current_user %>
         <h2> Your Account </h2>
         <p>
+            <strong>Score:</strong>
+            <%= current_user[:score] %><br>
             <strong>Email:</strong>
             <%= current_user[:email] %>
         </p>
