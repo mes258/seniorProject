@@ -19,7 +19,7 @@
 
 	<div class="field">
 		<strong><%= form.label :"Profile Picture" %></strong>
-		<%= form.file_field :picture %>
+		<%= form.file_field :picture, multiple: false, accept: 'image/*' %>
 	</div>
 
 

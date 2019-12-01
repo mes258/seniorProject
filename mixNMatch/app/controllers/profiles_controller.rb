@@ -36,13 +36,13 @@ class ProfilesController < ApplicationController
 				puts "Unable to find #{BUCKET_NAME}"
 			end
 		end
-    @profile.pictureID = "default"
-		return @profile.pictureID
+		return "default"
 	end
 
   def uploadToBucket(picture)
     if picture != nil
       file = Rails.root.join('public', 'uploads', picture)
+      puts "#{picture}"
       getCreds
       s3 = Aws::S3::Resource.new(region: REGION)
       bucket = s3.bucket(BUCKET_NAME)
@@ -50,9 +50,13 @@ class ProfilesController < ApplicationController
         key = "profile_"+current_user.id.to_s
         # Check if file is already in the bucket
         if bucket.object(key).exists?
-          puts "#{key} already exists in the bucket, overwriting..."
           obj = s3.bucket(BUCKET_NAME).object(key)
           obj.delete()
+					puts "#{key} deleted, overwriting..."
+          # Sorry this is jank, we just need this to ensure that updating works
+          while (bucket.object(key).exists?)
+            sleep(1)
+          end
         end
         obj = s3.bucket(BUCKET_NAME).object(key)
         obj.upload_file(file, acl: 'public-read')
@@ -64,7 +68,6 @@ class ProfilesController < ApplicationController
     end
     return "default"
   end
-
 
 
   # GET /profiles
@@ -131,7 +134,8 @@ class ProfilesController < ApplicationController
   # DELETE /profiles/1
   # DELETE /profiles/1.json
   def destroy
-    deleteFromBucket(@profile.pictureID)
+
+    @profile.pictureID = deleteFromBucket @profile.pictureID
     @profile.destroy
     respond_to do |format|
       format.html { redirect_to profiles_url, notice: 'Profile was successfully destroyed.' }
