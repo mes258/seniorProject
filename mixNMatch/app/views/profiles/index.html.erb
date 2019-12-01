@@ -6,6 +6,11 @@
   <%= @match_status %>
 <% end %>
 
+<p>
+  Target Profile:
+  <%= @target_profile.first %>
+</p>
+
 <%= render 'matches/form', match: Match.new %>
 
 <div class="profiles_grid">
