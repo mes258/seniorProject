@@ -6,22 +6,34 @@
   <%= @match_status %>
 <% end %>
 
+<p>
+  Target Profile:
+  <%= @target_profile.first %><br>
+  <%= image_tag(@target_profile.getPicture()) %><br>
+  Age: <%= @target_profile.age %><br>
+  song: <%= @target_profile.song %><br>
+  <%= @target_profile.description %>
+</p>
+
 <%= render 'matches/form', match: Match.new %>
 
 <div class="profiles_grid">
   <% @profiles.each do |profile| %>
-    <div class="profile">
+    <div class="profile" profile_id=<%=profile.id%>>
       <div class="center">
           <br>
           <h3><%= profile.first %></h3>
           <%= image_tag(profile.getPicture()) %>
       </div>
-      
       <p>
-        <%= profile.id %>
+        Age: <%= profile.age %><br>
+        Song: <%= profile.song %>
+      </p>
+      <p>
         <%= profile.description %>
       </p>
     </div>
   <% end %>
 </div>
 
+<script src="/assets/make_matches.js" type="text/javascript"></script>

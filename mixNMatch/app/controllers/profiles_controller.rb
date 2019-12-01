@@ -73,7 +73,15 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = Profile.all
+    #
+    #   IF YOU CHANGE THIS CODE YOU ALSO NEED TO CHANGE IT IN MATCHES_CONTROLLER
+    #                    (sorry for bad code duplication)
+    #
+    all_profiles = Profile.where("active = TRUE AND id != ?", current_user.profile.id)
+    # choose a random profile to be matched
+    @target_profile = all_profiles[srand % all_profiles.length]
+    # get all compatible profiles
+    @profiles = all_profiles.select{ |p| @target_profile.compatible p}
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 

@@ -78,7 +78,13 @@ class MatchesController < ApplicationController
         end
         
         respond_to do |format|
-            @profiles = Profile.all
+            # SET UP NEW MATCH (set vars for profiles/index)
+            all_profiles = Profile.where("active = TRUE AND id != ?", current_user.profile.id)
+            # choose a random profile to be matched
+            @target_profile = all_profiles[srand % all_profiles.length]
+            # get all compatible profiles
+            @profiles = all_profiles.select{ |p| @target_profile.compatible p}
+            @current_user ||= User.find(session[:user_id]) if session[:user_id]
             format.html { render "profiles/index" }
         end
 
