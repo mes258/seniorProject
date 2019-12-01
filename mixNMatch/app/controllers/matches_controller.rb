@@ -53,6 +53,7 @@ class MatchesController < ApplicationController
                     @match_status = "you have already made this match"
                 else
                     existant_match.users << current_user;
+                    update_score_match(current_user)
                     existant_match.save
                     @match_status = "match was successfully created"
                 end
@@ -67,7 +68,7 @@ class MatchesController < ApplicationController
                                          # otherwise errors happen (match does not exist)
                 m.save.to_s; # save user-match connection
                 #update user score
-                update_Profile_Score(-2)
+                update_score_match(current_user)
                 #update user details for match creation
                 @match_status = "match was successfully created"
             end

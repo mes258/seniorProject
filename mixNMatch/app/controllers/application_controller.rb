@@ -14,10 +14,10 @@ class ApplicationController < ActionController::Base
         @profile ||= Profile.find_by(user: session[:user_id]) if session[:user_id]
     end 
     
-    def update_Profile_Score score_change
-        @current_user ||= User.find(session[:user_id]) if session[:user_id]
-        @current_user[:score] = @current_user[:score] + score_change
+    def update_score_match user
+        user[:score] = user[:score] - 2
         puts("Updated score")
-        User.where(id: current_user[:id]).update_all(score: current_user[:score])
+        User.where(id: user[:id]).update_all(score: user[:score])
+        # @current_user.save
     end 
 end
