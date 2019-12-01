@@ -73,6 +73,9 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
+    # choose a random profile to be matched
+    
+
     @profiles = Profile.all
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
