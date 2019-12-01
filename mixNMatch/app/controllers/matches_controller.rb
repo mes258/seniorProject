@@ -98,6 +98,7 @@ class MatchesController < ApplicationController
     def update_status
         @match = Match.find(params[:match][:id])
         if @match.update(match_params)
+            update_score_match_accepted(@match.id)
             @matches = Match.where("profile1_id = ? OR profile2_id = ?", current_user.profile.id, current_user.profile.id)
             @your_profile = current_user.profile
             render "index"
