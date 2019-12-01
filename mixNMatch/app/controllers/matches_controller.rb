@@ -60,11 +60,15 @@ class MatchesController < ApplicationController
                 m = Match.new();
                 m.profile1 = p1;
                 m.profile2 = p2;
-                m.status = 0;
+                m.status1 = 0;
+                m.status2 = 0;
                 m.save.to_s; # create match
                 m.users << current_user; # add user once match id exists
                                          # otherwise errors happen (match does not exist)
                 m.save.to_s; # save user-match connection
+                #update user score
+                update_Profile_Score(-2)
+                #update user details for match creation
                 @match_status = "match was successfully created"
             end
         else

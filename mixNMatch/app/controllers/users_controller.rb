@@ -14,6 +14,7 @@ class UsersController < ApplicationController
 
         if @user.save
             @user[:email] = user_params[:email]
+            @user[:score] = 50;
             @user.save
             redirect_to root_url, :notice => "Signed up!"
         else
