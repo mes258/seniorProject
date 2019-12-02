@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_01_183825) do
+ActiveRecord::Schema.define(version: 2019_12_02_163219) do
 
   create_table "matches", force: :cascade do |t|
     t.integer "profile1_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2019_12_01_183825) do
     t.string "pictureID", default: "default"
     t.boolean "active", default: true
     t.integer "age", default: 20
+    t.text "contact_info"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

@@ -7,15 +7,17 @@
 <% end %>
 
 <p>
-  Target Profile:
-  <%= @target_profile.first %><br>
-  <%= image_tag(@target_profile.getPicture(), :class => "profile_pic") %><br>
+  Find a match for: <strong><%= @target_profile.first %></strong><br>
+  <div class="profile_pic">
+    <%= image_tag(@target_profile.getPicture()) %><br>
+  </div>
   Age: <%= @target_profile.age %><br>
   song: <%= @target_profile.song %><br>
   <%= @target_profile.description %>
 </p>
 
 <%= render 'matches/form', match: Match.new %>
+<button onclick="window.location.href = '/profiles';">Match someone else</button>
 
 <div class="profiles_grid">
   <% @profiles.each do |profile| %>

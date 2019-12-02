@@ -17,13 +17,19 @@
   <p>
     <%= p.description %>
   </p>
-
-  <%if match.profile2.id == @your_profile.id%>
-      <%= link_to 'Accept Match', matches_update_status_path(:match => {:id => match.id, :status1 => 1}), class:"button is-danger", remote: false %>
-      <%= link_to 'Reject Match', matches_update_status_path(:match => {:id => match.id, :status1 => 2}), class:"button is-danger", remote: false %>
+  <%if match.status1 == 1 && match.status2 == 1%>
+    <p>
+      <%= p.contact_info %>
+    </p>
   <%else%>
+    <%if match.profile2.id == @your_profile.id%>
       <%= link_to 'Accept Match', matches_update_status_path(:match => {:id => match.id, :status2 => 1}), class:"button is-danger", remote: false %>
       <%= link_to 'Reject Match', matches_update_status_path(:match => {:id => match.id, :status2 => 2}), class:"button is-danger", remote: false %>
+    <%else%>
+      <%= link_to 'Accept Match', matches_update_status_path(:match => {:id => match.id, :status1 => 1}), class:"button is-danger", remote: false %>
+      <%= link_to 'Reject Match', matches_update_status_path(:match => {:id => match.id, :status1 => 2}), class:"button is-danger", remote: false %>
+    <%end%>
   <%end%>
+  
 
 </div>
