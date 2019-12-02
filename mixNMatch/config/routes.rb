@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :profiles
+  post 'profiles/:id' => "profiles#show"
   get 'sessions/new'
   get 'users/new'
   get 'welcome/index'

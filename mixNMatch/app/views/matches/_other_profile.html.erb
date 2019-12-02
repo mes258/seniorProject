@@ -18,11 +18,9 @@
     <%= p.description %>
   </p>
   <%if match.status1 == 1 && match.status2 == 1%>
-    <%if match.profile2.id == @your_profile.id%>
-      CONTACT INFO GOES HERE
-    <%else%>
-      CONTACT INFO GOES HERE
-    <%end%>
+    <p>
+      <%= p.contact_info %>
+    </p>
   <%else%>
     <%if match.profile2.id == @your_profile.id%>
       <%= link_to 'Accept Match', matches_update_status_path(:match => {:id => match.id, :status2 => 1}), class:"button is-danger", remote: false %>

@@ -24,12 +24,12 @@
 
 
   <div class="field">
-    <strong><%= form.label :first %></strong>
+    <strong>First Name</strong><br>
     <%= form.text_field :first %>
   </div>
 
   <div class="field">
-    <strong><%= form.label :last %></strong>
+    <strong>Last Name</strong><br>other users won't be able to see this<br>
     <%= form.text_field :last %>
   </div>
 
@@ -39,8 +39,8 @@
   </div>
 
   <div class="field">
-    <strong><%= form.label :description %></strong>
-    <%= form.text_area :description %>
+    <strong>Bio</strong><br>
+    <%= form.text_area :description, :cols => "80", :rows => "6" %>
   </div>
 
   <div class="field">
@@ -71,6 +71,8 @@
       </span>
     </div>
   </div>
+  <br>
+  <br>
 
   <div class="field">
     <strong><%= form.label :preference %></strong>
@@ -94,6 +96,14 @@
         <%= form.radio_button :preference, 2 %>
       </span>
     </div>
+  </div>
+  <br>
+  <br>
+
+  <div class="field">
+    <strong>Message to show on successful match</strong><br>
+    include some way to contact you<br>
+    <%= form.text_area :contact_info, :cols => "80", :rows => "6" %>
   </div>
 
   <div class="actions">
