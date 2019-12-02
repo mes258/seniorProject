@@ -1,0 +1,29 @@
+<!-- pass in @match and @your_profile-->
+<%if match.profile2.id == @your_profile.id%>
+  <%p = match.profile1%>
+<%else%>
+  <%p = match.profile2%>
+<%end%>
+
+<div class="profile" profile_id=<%=p.id%>>
+  <div class="center">
+      <h3><%= p.first %></h3>
+      <%= image_tag(p.getPicture()) %>
+  </div>
+  <p>
+    Age: <%= p.age %><br>
+    Song: <%= p.song %>
+  </p>
+  <p>
+    <%= p.description %>
+  </p>
+
+  <%if match.profile2.id == @your_profile.id%>
+      <%= link_to 'Accept Match', matches_update_status_path(:match => {:id => match.id, :status1 => 1}), class:"button is-danger", remote: false %>
+      <%= link_to 'Reject Match', matches_update_status_path(:match => {:id => match.id, :status1 => 2}), class:"button is-danger", remote: false %>
+  <%else%>
+      <%= link_to 'Accept Match', matches_update_status_path(:match => {:id => match.id, :status2 => 1}), class:"button is-danger", remote: false %>
+      <%= link_to 'Reject Match', matches_update_status_path(:match => {:id => match.id, :status2 => 2}), class:"button is-danger", remote: false %>
+  <%end%>
+
+</div>

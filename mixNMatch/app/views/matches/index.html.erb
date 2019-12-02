@@ -13,12 +13,35 @@ we should update this to use the same profile format as the profiles index<br><b
     </tr>
   </thead>
 
-  <!-- show matches that have been double accepted here -->
-  <!-- when an accepted match is viewed, show their contact info -->
+  <%#if there are mutual accepts%>
+    <h2>Mutual Accepts:</h2>
+    <ul>
+        <% @matches.each do |match| %>
+          <li>
+            <%if match.profile2.id == @your_profile.id%>
+              <%= render 'profiles/widget', profile: match.profile1 %>
+            <%else%>
+              <%= render 'profiles/widget', profile: match.profile2 %>
+            <%end%>
+          </li>
+        <% end %>
+    </ul>
+  <%#end%>
+
   <!-- we should have a feild in profile for a message to show successful matches -->
   <!-- message with contact info of their choice, not necessarily their email -->
 
   <!-- show matches that current_user has not made a decision about -->
+  <h2>Suggested Matches:</h2>
+  <ul>
+    <% @matches.each do |match| %>
+      <li>
+        <%= render 'matches/other_profile', match: match, current_user: @current_user %>
+      </li>
+    <% end %>
+  </ul>
+  
+
   <tbody>
     <% @matches.each do |match| %>
       <tr>
