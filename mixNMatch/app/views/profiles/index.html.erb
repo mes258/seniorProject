@@ -8,7 +8,9 @@
 
 <p>
   Find a match for: <strong><%= @target_profile.first %></strong><br>
-  <%= image_tag(@target_profile.getPicture()) %><br>
+  <div class="profile_pic">
+    <%= image_tag(@target_profile.getPicture()) %><br>
+  </div>
   Age: <%= @target_profile.age %><br>
   song: <%= @target_profile.song %><br>
   <%= @target_profile.description %>

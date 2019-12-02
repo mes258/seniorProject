@@ -8,7 +8,7 @@
 <div class="profile" profile_id=<%=p.id%>>
   <div class="center">
       <h3><%= p.first %></h3>
-      <%= image_tag(p.getPicture()) %>
+      <%= image_tag(p.getPicture(), :class => "profile_pic") %>
   </div>
   <p>
     Age: <%= p.age %><br>
