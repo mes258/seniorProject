@@ -45,40 +45,44 @@ class MatchesController < ApplicationController
             pids << params[:match][:profile1_id]
             pids << params[:match][:profile2_id]
             pids.sort!
-            p1 = Profile.find(pids.first)
-            p2 = Profile.find(pids.second)
+            if(pids.first != "" && pids.second != "")
+                p1 = Profile.find(pids.first)
+                p2 = Profile.find(pids.second)
 
-            if p1.compatible(p2)
-                puts("!!   profiles are compatible")
-                existant_match = Match.where(profile1_id: pids.first, profile2_id: pids.second).take
-                if existant_match.present?
-                    # match exists: add user to it, unless they already made this match
-                    if existant_match.users.include?(current_user)
-                        @match_status = "you have already made this match"
+                if p1.compatible(p2)
+                    puts("!!   profiles are compatible")
+                    existant_match = Match.where(profile1_id: pids.first, profile2_id: pids.second).take
+                    if existant_match.present?
+                        # match exists: add user to it, unless they already made this match
+                        if existant_match.users.include?(current_user)
+                            @match_status = "you have already made this match"
+                        else
+                            existant_match.users << current_user;
+                            update_score_match(current_user)
+                            existant_match.save
+                            @match_status = "match was successfully created"
+                        end
                     else
-                        existant_match.users << current_user;
+                        m = Match.new();
+                        m.profile1 = p1;
+                        m.profile2 = p2;
+                        m.status1 = 0;
+                        m.status2 = 0;
+                        m.save.to_s; # create match
+                        m.users << current_user; # add user once match id exists
+                                                # otherwise errors happen (match does not exist)
+                        m.save.to_s; # save user-match connection
+                        #update user score
                         update_score_match(current_user)
-                        existant_match.save
+                        #update user details for match creation
                         @match_status = "match was successfully created"
                     end
                 else
-                    m = Match.new();
-                    m.profile1 = p1;
-                    m.profile2 = p2;
-                    m.status1 = 0;
-                    m.status2 = 0;
-                    m.save.to_s; # create match
-                    m.users << current_user; # add user once match id exists
-                                            # otherwise errors happen (match does not exist)
-                    m.save.to_s; # save user-match connection
-                    #update user score
-                    update_score_match(current_user)
-                    #update user details for match creation
-                    @match_status = "match was successfully created"
+                    puts("!!   profiles are not compatible")
+                    @match_status = "match was not compatible"
                 end
             else
-                puts("!!   profiles are not compatible")
-                @match_status = "match was not compatible"
+                @match_status = "You must select another user to match with"
             end
         else
             @match_status = "Sorry, your score is too low to create new matches"
