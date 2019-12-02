@@ -31,56 +31,66 @@ class MatchesController < ApplicationController
 
     # show only matches which the current user is a party of
     def index
-        @matches = Match.where("profile1_id = ? OR profile2_id = ?", current_user.profile.id, current_user.profile.id)
+        if(current_user.profile != nil)
+            @matches = Match.where("profile1_id = ? OR profile2_id = ?", current_user.profile.id, current_user.profile.id)
+        else
+            @matches = []
+        end 
         @your_profile = current_user.profile
     end
 
     def create
-        
-        pids = []
-        pids << params[:match][:profile1_id]
-        pids << params[:match][:profile2_id]
-        pids.sort!
-        p1 = Profile.find(pids.first)
-        p2 = Profile.find(pids.second)
+        if(current_user.score > 4)
+            pids = []
+            pids << params[:match][:profile1_id]
+            pids << params[:match][:profile2_id]
+            pids.sort!
+            p1 = Profile.find(pids.first)
+            p2 = Profile.find(pids.second)
 
-        if p1.compatible(p2)
-            puts("!!   profiles are compatible")
-            existant_match = Match.where(profile1_id: pids.first, profile2_id: pids.second).take
-            if existant_match.present?
-                # match exists: add user to it, unless they already made this match
-                if existant_match.users.include?(current_user)
-                    @match_status = "you have already made this match"
+            if p1.compatible(p2)
+                puts("!!   profiles are compatible")
+                existant_match = Match.where(profile1_id: pids.first, profile2_id: pids.second).take
+                if existant_match.present?
+                    # match exists: add user to it, unless they already made this match
+                    if existant_match.users.include?(current_user)
+                        @match_status = "you have already made this match"
+                    else
+                        existant_match.users << current_user;
+                        update_score_match(current_user)
+                        existant_match.save
+                        @match_status = "match was successfully created"
+                    end
                 else
-                    existant_match.users << current_user;
+                    m = Match.new();
+                    m.profile1 = p1;
+                    m.profile2 = p2;
+                    m.status1 = 0;
+                    m.status2 = 0;
+                    m.save.to_s; # create match
+                    m.users << current_user; # add user once match id exists
+                                            # otherwise errors happen (match does not exist)
+                    m.save.to_s; # save user-match connection
+                    #update user score
                     update_score_match(current_user)
-                    existant_match.save
+                    #update user details for match creation
                     @match_status = "match was successfully created"
                 end
             else
-                m = Match.new();
-                m.profile1 = p1;
-                m.profile2 = p2;
-                m.status1 = 0;
-                m.status2 = 0;
-                m.save.to_s; # create match
-                m.users << current_user; # add user once match id exists
-                                         # otherwise errors happen (match does not exist)
-                m.save.to_s; # save user-match connection
-                #update user score
-                update_score_match(current_user)
-                #update user details for match creation
-                @match_status = "match was successfully created"
+                puts("!!   profiles are not compatible")
+                @match_status = "match was not compatible"
             end
         else
-            puts("!!   profiles are not compatible")
-            @match_status = "match was not compatible"
-        end
+            @match_status = "Sorry, your score is too low to create new matches"
+        end 
         
         respond_to do |format|
             # SET UP NEW MATCH (set vars for profiles/index)
-            all_profiles = Profile.where("active = TRUE AND id != ?", current_user.profile.id)
-            # choose a random profile to be matched
+            if(current_user.profile != nil)
+                all_profiles = Profile.where("active = TRUE AND id != ?", current_user.profile.id)
+            else
+                all_profiles = Profile.all
+            end             # choose a random profile to be matched
             @target_profile = all_profiles[srand % all_profiles.length]
             # get all compatible profiles
             @profiles = all_profiles.select{ |p| @target_profile.compatible p}

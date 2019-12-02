@@ -77,7 +77,11 @@ class ProfilesController < ApplicationController
     #   IF YOU CHANGE THIS CODE YOU ALSO NEED TO CHANGE IT IN MATCHES_CONTROLLER
     #                    (sorry for bad code duplication)
     #
-    all_profiles = Profile.where("active = TRUE AND id != ?", current_user.profile.id)
+    if(current_user.profile != nil)
+        all_profiles = Profile.where("active = TRUE AND id != ?", current_user.profile.id)
+    else
+        all_profiles = Profile.all
+    end 
     # choose a random profile to be matched
     @target_profile = all_profiles[srand % all_profiles.length]
     # get all compatible profiles
