@@ -1,9 +1,6 @@
 class MatchesController < ApplicationController
-    def index
-        match1 = Match.all.where(profile1: current_user.profile.id)
-        match2 = Match.all.where(profile2: current_user.profile.id)
-        @matches = match1 | match2
-    end
+    
+
 
     def show
         @inValid = true;
@@ -32,10 +29,15 @@ class MatchesController < ApplicationController
     # show only matches which the current user is a party of
     def index
         if(current_user.profile != nil)
-            @matches = Match.where("profile1_id = ? OR profile2_id = ?", current_user.profile.id, current_user.profile.id)
+            match1 = Match.all.where(profile1: current_user.profile.id)
+            match2 = Match.all.where(profile2: current_user.profile.id)
         else
-            @matches = []
+            match1 = []
+            match2 = []
         end 
+        your_matches = match1 | match2
+        @successful_matches = your_matches.select{|m| m.status1 == 1 and m.status2 ==1}
+        @pending_response = match1.select{|m| m.status1 == 0} | match2.select{|m| m.status2 == 0}
         @your_profile = current_user.profile
     end
 
@@ -113,7 +115,17 @@ class MatchesController < ApplicationController
         @match = Match.find(params[:match][:id])
         if @match.update(match_params)
             update_score_match_accepted(@match.id)
-            @matches = Match.where("profile1_id = ? OR profile2_id = ?", current_user.profile.id, current_user.profile.id)
+            # do the stuff you need to render the index
+            if(current_user.profile != nil)
+                match1 = Match.all.where(profile1: current_user.profile.id)
+                match2 = Match.all.where(profile2: current_user.profile.id)
+            else
+                match1 = []
+                match2 = []
+            end 
+            your_matches = match1 | match2
+            @successful_matches = your_matches.select{|m| m.status1 == 1 and m.status2 ==1}
+            @pending_response = match1.select{|m| m.status1 == 0} | match2.select{|m| m.status2 == 0}
             @your_profile = current_user.profile
             render "index"
         else
