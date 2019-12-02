@@ -1,59 +1,73 @@
 <p id="notice"><%= notice %></p>
 
-<div>
-    <% if current_user %>
-        <h2> Your Account </h2>
-        <p>
-            <strong>Score:</strong>
-            <%= current_user[:score] %><br>
-            <strong>Email:</strong>
-            <%= current_user[:email] %>
-        </p>
-        <% if profile %>
-
-            <h3> Your Profile </h3>
-
-			<p>
-              <%= puts(@profile.getPicture()) %>
-			  <%= image_tag(@profile.getPicture()) %>
-            </p>
-            
-            <p>
-                <strong>Age:</strong>
-                <%= @profile[:age] %>
-            </p>
-
-            <p>
-                <strong>Description: </strong>
-                <%= @profile[:description] %>
-            <p>
-            <p>
-                <strong>Song: </strong>
-                <%= @profile[:song] %>
-            <p>
-            <p>
-                <strong>Preference: </strong>
-                <%= Profile.preferenceMap(@profile.preference) %>
-            </p>
-            <p>
-                <strong>Gender: </strong>
-                <%= Profile.genderMap(@profile.gender) %>
-            </p>
-            <p>
-                <strong>Value: </strong>
-                <%= @profile[:value] %>
-            <p>
-            <p>
-                <strong>Priority: </strong>
-                <%= @profile[:priority] %>
-            <p>
-
-            <%= link_to 'Edit', edit_profile_path(@profile) %>
-        <% else %>
-            <p> Create a profile here: </p>
-            <%= link_to 'New', new_profile_path %>
-        <% end %>
-
-
+<% if current_user %>
+  <div class="account_disp">
+    <% if profile %>
+  	<h1> Hello  <%= @profile.first %>!</h1>
+    <% else %>
+      <h1> Your Account: </h1>
     <% end %>
-</div>
+  	<div class="account_bar">
+      <div class="account_item">
+        <strong>Email:</strong>
+        <%= current_user[:email] %>
+      </div>
+      <div class="account_item">
+  			<strong>Current Score:</strong>
+  			<%= current_user[:score] %>
+      </div>
+  	</div>
+  </div>
+  <% if profile %>
+    <div class="profile_container">
+      <div class="center">
+        <h2> Your Profile </h2>
+      </div>
+      <div class="profile_pic">
+        <%= puts(@profile.getPicture()) %>
+        <%= image_tag(@profile.getPicture()) %>
+      </div>
+      <div class="profile_body">
+
+        <p>
+          <strong>Age:</strong>
+          <%= @profile.age %>
+        </p>
+
+        <p>
+          <strong>Description:</strong>
+          <%= @profile.description %>
+        </p>
+
+        <p>
+          <strong>Song:</strong>
+          <%= @profile.song %>
+        </p>
+
+        <p>
+          <strong>Preference:</strong>
+          <%= Profile.preferenceMap(@profile.preference) %>
+        </p>
+
+        <p>
+          <strong>Gender:</strong>
+          <%= Profile.genderMap(@profile.gender) %>
+        </p>
+
+        <p>
+          <strong>Value:</strong>
+          <%= @profile.value %>
+        </p>
+
+        <p>
+          <strong>Priority:</strong>
+          <%= @profile.priority %>
+        </p>
+        <%= link_to 'Edit', edit_profile_path(@profile) %>
+      </div>
+    </div>
+  <% else %>
+      <p> Create a profile here: </p>
+      <%= link_to 'New', new_profile_path %>
+  <% end %>
+<% end %>

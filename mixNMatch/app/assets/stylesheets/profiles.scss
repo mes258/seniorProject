@@ -62,7 +62,18 @@
   text-align: center;
 }
 
-img {
+.profile_pic{
+  float: left;
   height: 200px;
   max-width: 90%;
+  padding: 2% 0% 0% 26%;
+}
+
+.profile_body{
+  float: right;
+  padding: 6% 30% 0% 0%;
+}
+
+.banner {
+  padding: 0% 0% 30% 0%;
 }

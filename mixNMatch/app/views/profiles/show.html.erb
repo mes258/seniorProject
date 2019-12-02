@@ -1,49 +1,52 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <%= puts(@profile.getPicture()) %>
-  <%= image_tag(@profile.getPicture()) %>
-</p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @profile.fullName() %>
-</p>
+<div class="profile_container">
+  <div class="profile_pic">
+    <%= puts(@profile.getPicture()) %>
+    <%= image_tag(@profile.getPicture()) %>
+  </div>
+  <div class="profile_body">
+    <p>
+      <strong>Name:</strong>
+      <%= @profile.fullName() %>
+    </p>
 
-<p>
-  <strong>Age:</strong>
-  <%= @profile.age %>
-</p>
+    <p>
+      <strong>Age:</strong>
+      <%= @profile.age %>
+    </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @profile.description %>
-</p>
+    <p>
+      <strong>Description:</strong>
+      <%= @profile.description %>
+    </p>
 
-<p>
-  <strong>Song:</strong>
-  <%= @profile.song %>
-</p>
+    <p>
+      <strong>Song:</strong>
+      <%= @profile.song %>
+    </p>
 
-<p>
-  <strong>Preference:</strong>
-  <%= Profile.preferenceMap(@profile.preference) %>
-</p>
+    <p>
+      <strong>Preference:</strong>
+      <%= Profile.preferenceMap(@profile.preference) %>
+    </p>
 
-<p>
-  <strong>Gender:</strong>
-  <%= Profile.genderMap(@profile.gender) %>
-</p>
+    <p>
+      <strong>Gender:</strong>
+      <%= Profile.genderMap(@profile.gender) %>
+    </p>
 
-<p>
-  <strong>Value:</strong>
-  <%= @profile.value %>
-</p>
+    <p>
+      <strong>Value:</strong>
+      <%= @profile.value %>
+    </p>
 
-<p>
-  <strong>Priority:</strong>
-  <%= @profile.priority %>
-</p>
-
-# <%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+    <p>
+      <strong>Priority:</strong>
+      <%= @profile.priority %>
+    </p>
+    <%= link_to 'Edit', edit_profile_path(@profile) %> |
+    <%= link_to 'Back', profiles_path %>
+  </div>
+</div>

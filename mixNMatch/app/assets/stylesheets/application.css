@@ -14,14 +14,120 @@
  *= require_self
  */
 
-/*
+@import "font-awesome";
 
-some colors:
+:root {
+	/* base css color scheme */
+	--panel: ##9AA899;
+	--background: #e8f3fd;
+	--header: #D74E09;
+	--fields: #f39f2c;
 
-#E76605 orange
-#EAA214 yellow
-#C9B974 pale green
-#538A79 green
-#222428 black
+	/*  logo color scheme */
+	--mix: #ed6a5a;
+	--n: #1383e2;
+	--match: #f39f2c;
+	--frame: #60b0f4;
+}
 
-*/
+.logo{
+	float:left;
+	max-width: 10%;
+	height: auto;
+
+}
+
+/* .top_left{
+	padding: 0% 0% 1% 2%;
+} */
+
+
+.navigation_bar{
+	color: var(--header);
+	padding: 0% 1% 3% 0px;
+}
+
+.navigation_bar a{
+	color: var(--header);
+}
+
+.navigation_bar a:hover {
+	background-color: var(--background);
+	color: var(--fields);
+	transition: all 0.3s;
+}
+
+.banner {
+	background-image: url(middle.png);
+	background-size: cover;
+	width: 100%;
+	background-repeat: no-repeat;
+	color: var(--header)
+}
+
+body {
+	background-color: var(--background)
+}
+
+h1 {
+	color: var(--header);
+}
+
+footer {
+	text-align: center;
+	background-image: url(footer.png);
+	background-size: cover;
+	width: 100%;
+	background-repeat: no-repeat;
+	padding: 0% 0px 4% 0px;
+}
+
+footer ul {
+	padding: 9% 0px 0% 0px;;
+	margin: 0;
+	list-style: none;
+}
+
+footer ul li {
+	display: inline-block;
+	margin: 0 3px;
+}
+
+footer ul li .not_a{
+	font-size: 16px;
+	color: var(--fields);
+	display: inline-block;
+	width: 38px;
+	height: 38px;
+	line-height: 38px;
+	text-align: center;
+	background-color: var(--background);
+	border-radius: 50%;
+}
+
+footer ul li .not_a:hover {
+	background-color: var(--header);
+	color: var(--fields);
+	transition: all 0.3s;
+}
+
+footer p {
+	margin-top: 20px;
+	font-size: 10px;
+	font-weight: 300;
+	letter-spacing: 0.2px;
+	color: var(--header);
+}
+
+footer em {
+	font-style: normal;
+	font-weight: 600;
+}
+
+footer .not_a {
+	color: #fff;
+}
+
+footer .not_a:hover {
+	color: #3CF;
+}

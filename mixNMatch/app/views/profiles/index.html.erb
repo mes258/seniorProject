@@ -9,7 +9,7 @@
 <p>
   Target Profile:
   <%= @target_profile.first %><br>
-  <%= image_tag(@target_profile.getPicture()) %><br>
+  <%= image_tag(@target_profile.getPicture(), :class => "profile_pic") %><br>
   Age: <%= @target_profile.age %><br>
   song: <%= @target_profile.song %><br>
   <%= @target_profile.description %>
