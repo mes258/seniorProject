@@ -39,15 +39,12 @@
                 <strong>Gender: </strong>
                 <%= Profile.genderMap(@profile.gender) %>
             </p>
-            <p>
-                <strong>Value: </strong>
-                <%= @profile[:value] %>
-            <p>
-            <p>
-                <strong>Priority: </strong>
-                <%= @profile[:priority] %>
-            <p>
 
+            <p>
+            <strong> Profile is Active: </strong>
+                <%= @profile[:active] %>
+            </p>
+            
             <%= link_to 'Edit', edit_profile_path(@profile) %>
         <% else %>
             <p> Create a profile here: </p>

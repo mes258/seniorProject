@@ -106,6 +106,24 @@
     <%= form.text_area :contact_info, :cols => "80", :rows => "6" %>
   </div>
 
+  <div class="field">
+    <strong><%= form.label :active %></strong>
+    <div class="radio" style="margin:1em">
+      <span style="float:left">
+        <%= form.label :active, 'TRUE:'%>
+      </span>
+      <span style="display:block">
+        <%= form.radio_button :active, 'true' %>
+      </span>
+      <span style="float:left">
+        <%= form.label :active, 'FALSE:'%>
+      </span>
+      <span style="display:block">
+        <%= form.radio_button :active, 'false' %>
+      </span>
+    </div>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

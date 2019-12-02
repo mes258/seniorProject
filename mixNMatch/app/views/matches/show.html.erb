@@ -31,14 +31,6 @@
                 <strong>Gender: </strong>
                 <%= Profile.genderMap(@otherProfile.gender) %>
             </p>
-            <p>
-                <strong>Value: </strong>
-                <%= @otherProfile[:value] %>
-            </p>
-            <p>
-                <strong>Priority: </strong>
-                <%= @otherProfile[:priority] %>
-            </p>
         </p>
         <%if @otherProfile.id == @match.profile2.id%>
             <%= link_to 'Accept Match', matches_update_status_path(:match => {:id => @match.id, :status1 => 1}), class:"button is-danger", remote: false %>
