@@ -16,7 +16,12 @@
 			<p>
               <%= puts(@profile.getPicture()) %>
 			  <%= image_tag(@profile.getPicture()) %>
-			</p>
+            </p>
+            
+            <p>
+                <strong>Age:</strong>
+                <%= @profile[:age] %>
+            </p>
 
             <p>
                 <strong>Description: </strong>
