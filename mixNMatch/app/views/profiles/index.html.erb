@@ -6,17 +6,15 @@
   <%= @match_status %>
 <% end %>
 
-<p>
+<p class="constrain-width">
   Find a match for: <strong><%= @target_profile.first %></strong><br>
-  <div class="profile_pic">
-    <%= image_tag(@target_profile.getPicture()) %><br>
-  </div>
+  <%= image_tag(@target_profile.getPicture()) %><br>
   Age: <%= @target_profile.age %><br>
   song: <%= @target_profile.song %><br>
   <%= @target_profile.description %>
 </p>
 
-<%= render 'matches/form', match: Match.new %>
+<%= render 'matches/form', match: Match.new %><br>
 <button onclick="window.location.href = '/profiles';">Match someone else</button>
 
 <div class="profiles_grid">
@@ -29,10 +27,8 @@
       </div>
       <p>
         Age: <%= profile.age %><br>
+        <%= profile.description %><br>
         Song: <%= profile.song %>
-      </p>
-      <p>
-        <%= profile.description %>
       </p>
     </div>
   <% end %>

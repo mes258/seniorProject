@@ -18,7 +18,7 @@
     grid-row-gap: 40px;
   }
 }
-@media only screen and (min-width: 981px) {
+@media only screen and (min-width: 970px) {
   .profiles_grid {
     grid-template-columns: 30% 30% 30%;
     grid-column-gap: 5%;
@@ -63,9 +63,17 @@
   text-align: center;
 }
 
+.constrain-width{
+  width: 400px;
+}
+
+.profile img{
+  max-width: 200px;
+}
+
 .profile_pic{
-  float: left;
-  height: 200px;
+  float: center;
+  height: auto;
   max-width: 90%;
   padding: 2% 0% 0% 26%;
 }
