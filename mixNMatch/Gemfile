@@ -27,6 +27,9 @@ gem 'aws-sdk'
 gem 'font-awesome-rails'
 # Unicorn Server
 gem 'unicorn'
+# Mina project manager
+gem 'mina'
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

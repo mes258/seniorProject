@@ -1,5 +1,6 @@
 require 'mina/rails'
 require 'mina/git'
+require 'mina/bundler'
 # require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (https://rvm.io)
 
@@ -11,12 +12,12 @@ require 'mina/git'
 
 set :application_name, 'mixNMatch'
 set :domain, 'ec2-52-24-229-110.us-west-2.compute.amazonaws.com'
-set :deploy_to, '/var/www/seniorProject/mixNMatch'
+set :deploy_to, '/home/ubuntu/www/mixNMatch'
 set :repository, 'https://github.com/mes258/seniorProject.git'
 set :branch, 'master'
 
 # Optional settings:
-#   set :user, 'foobar'          # Username in the server to SSH to.
+   set :user, 'ubuntu'          # Username in the server to SSH to.
 #   set :port, '30000'           # SSH port number.
 #   set :forward_agent, true     # SSH forward_agent.
 
