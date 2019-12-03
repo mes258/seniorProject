@@ -10,34 +10,21 @@ ul{
 
 li{
     display:inline;
+    margin: 12px;
 }
 
-.profile{
+.match-profile{
   border-radius: 10px;
-//   width: 400px;
+  width: 300px;
   height: 500px;
   display: inline-block;
   overflow-y: scroll;
   padding: 10px;
   color: black;
-}
-.profile:nth-child(5n+0){
   background-color: #9055cf;
 }
-.profile:nth-child(5n+1){
-  background-color: #cf5590;
-}
-.profile:nth-child(5n+2){
-  background-color: #5590cf;
-}
-.profile:nth-child(5n+3){
-  background-color: #90cf55;
-}
-.profile:nth-child(5n+4){
-  background-color: #55cf90;
-}
 
-.profile p{
+.match-profile p{
   white-space: pre-line;
 }
 

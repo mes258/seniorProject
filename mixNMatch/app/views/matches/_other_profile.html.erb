@@ -5,10 +5,10 @@
   <%p = match.profile2%>
 <%end%>
 
-<div class="profile" profile_id=<%=p.id%>>
+<div class="match-profile" profile_id=<%=p.id%>>
   <div class="center">
       <h3><%= p.first %></h3>
-      <%= image_tag(p.getPicture(), :class => "profile_pic") %>
+      <%= image_tag p.getPicture() %>
   </div>
   <p>
     Age: <%= p.age %><br>
@@ -23,11 +23,11 @@
     </p>
   <%else%>
     <%if match.profile2.id == @your_profile.id%>
-      <%= link_to 'Accept Match', matches_update_status_path(:match => {:id => match.id, :status2 => 1}), class:"button is-danger", remote: false %>
-      <%= link_to 'Reject Match', matches_update_status_path(:match => {:id => match.id, :status2 => 2}), class:"button is-danger", remote: false %>
+      <%= button_to 'Accept Match', matches_update_status_path(:match => {:id => match.id, :status2 => 1}), class:"button is-danger", remote: false %>
+      <%= button_to 'Reject Match', matches_update_status_path(:match => {:id => match.id, :status2 => 2}), class:"button is-danger", remote: false %>
     <%else%>
-      <%= link_to 'Accept Match', matches_update_status_path(:match => {:id => match.id, :status1 => 1}), class:"button is-danger", remote: false %>
-      <%= link_to 'Reject Match', matches_update_status_path(:match => {:id => match.id, :status1 => 2}), class:"button is-danger", remote: false %>
+      <%= button_to 'Accept Match', matches_update_status_path(:match => {:id => match.id, :status1 => 1}), class:"button is-danger", remote: false %>
+      <%= button_to 'Reject Match', matches_update_status_path(:match => {:id => match.id, :status1 => 2}), class:"button is-danger", remote: false %>
     <%end%>
   <%end%>
   
