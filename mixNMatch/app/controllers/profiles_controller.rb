@@ -81,7 +81,7 @@ class ProfilesController < ApplicationController
         all_profiles = Profile.where("active = TRUE AND id != ?", current_user.profile.id)
     else
         all_profiles = Profile.all
-    end 
+    end
     # choose a random profile to be matched
     @target_profile = all_profiles[srand % all_profiles.length]
     # get all compatible profiles
