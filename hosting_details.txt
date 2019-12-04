@@ -15,5 +15,3 @@ Plan is to use:
 
 --> Was using this tutorial:
 https://www.ralfebert.de/tutorials/rails-deployment/
-
--->
