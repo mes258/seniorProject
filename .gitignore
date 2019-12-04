@@ -1,3 +1,6 @@
 .DS_Store
+mixNMatch/config/database.yml
+mina_rsa
+mina_rsa.pub
 *.pem
 *.csv

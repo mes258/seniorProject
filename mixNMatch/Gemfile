@@ -25,10 +25,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'aws-sdk'
 # Font Awesome Icons
 gem 'font-awesome-rails'
-# Unicorn Server
-gem 'unicorn'
 # Mina project manager
-gem 'mina'
+gem 'mina', '~> 1.2.2'
 
 
 # Use Active Storage variant
