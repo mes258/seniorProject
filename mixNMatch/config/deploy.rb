@@ -47,9 +47,9 @@ task :setup do
     # Create database.yml for Postgres if it doesn't exist
     path_database_yml = "config/database.yml"
     database_yml = %[production: #{fetch(:user)}
-        adapter: sqlite3
-        pool: 5
-        timeout: 5000]
+      adapter: sqlite3
+      pool: 5
+      timeout: 5000]
 
   #     production:
   # database: #{fetch(:user)}
