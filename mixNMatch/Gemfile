@@ -22,9 +22,9 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 # Ruby AWS SDK
-gem 'aws-sdk'
+gem 'aws-sdk', '~> 3.0.1'
 # Font Awesome Icons
-gem 'font-awesome-rails'
+gem 'font-awesome-rails', '~> 4.7.0.5'
 # Passenger Server
 gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 

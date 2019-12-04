@@ -1,5 +1,10 @@
 ssh: ubuntu@34.221.97.48 --> admin on server
 
+ssh: mixnmatch@34.221.97.48 --> app-user on server
+
 dns: ec2-34-221-97-48.us-west-2.compute.amazonaws.com
 
 -- Key is the same.
+
+Tutorial:
+https://www.phusionpassenger.com/library/walkthroughs/deploy/ruby/aws/nginx/oss/xenial/deploy_app.html
