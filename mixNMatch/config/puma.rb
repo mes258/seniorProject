@@ -36,19 +36,3 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
-
-# environment "production"
-#
-# bind  "unix:///home/ubuntu/www/seniorProject/mixNMatch/shared/tmp/sockets/puma.sock"
-# pidfile "/home/ubuntu/www/seniorProject/mixNMatch/shared/tmp/pids/puma.pid"
-# state_path "/home/ubuntu/www/seniorProject/mixNMatch/shared/tmp/sockets/puma.state"
-# directory "/home/ubuntu/www/seniorProject/mixNMatch/current"
-#
-# workers 2
-# threads 1,2
-#
-# daemonize true
-#
-# activate_control_app 'unix:///home/ubuntu/www/seniorProject/mixNMatch/shared/tmp/sockets/pumactl.sock'
-#
-# prune_bundler
