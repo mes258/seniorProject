@@ -17,33 +17,54 @@
   <div id="user_nav" class="navigation_bar">
   <% if current_user %>
     <!-- User is logged in:  -->
-    <div style="float: right">
-        <p>
-        <%= link_to "Make Matches", profiles_path %>
-        |
-        <%= link_to "My Matches", matches_path %>
-        |
-        <%= link_to "My Account", current_user %>
-        |
-        Logged in as <%= current_user[:email] %>
-        |
-        <%= link_to "Log out", log_out_path %>
-        |
-        <%= link_to "Leaderboard", users_path %>
-        </p>
+    <div class="user_menu">
+        <h4>Logged in as <%= current_user[:email] %></h4>
+        <div class="dropdown">
+          <button onclick="populateDrop()" class="dropbtn">Menu</button>
+          <div id="droplist" class="dropdown-content">
+            <%= link_to "Make Matches", profiles_path %>
+            <%= link_to "Leaderboard", users_path %>
+            <%= link_to "My Matches", matches_path %>
+            <%= link_to "My Account", current_user %>
+            <%= link_to "Log out", log_out_path %>
+          </div>
+        </div>
     </div>
 
+    <script type="text/javascript">
+      function populateDrop() {
+        document.getElementById("droplist").classList.toggle("show");
+      }
+
+      window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+            }
+          }
+        }
+      }
+    </script>
   <% else %>
     <!-- User is not logged in. -->
-    <%= link_to "Sign up", sign_up_path %> or
-    <%= link_to "log in", log_in_path %>
+    <div style="float: right">
+      <%= link_to "Sign up", sign_up_path %> or
+      <%= link_to "log in", log_in_path %>
+    </div>
   <% end %>
 </div>
-
+<div class="banner">
+  <br />
+  <br />
+  <br />
+  <br />
   <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, :id => "flash_#{name}" %>
-<% end %>
-<div class="banner">
+  <% end %>
   <%= yield %>
 </div>
 </body>

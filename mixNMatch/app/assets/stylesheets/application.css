@@ -34,9 +34,61 @@
 	float:left;
 	max-width: 10%;
 	height: auto;
-
 }
 
+.user_menu {
+  width: auto;
+  float: right;
+  display: inline;
+  text-align: center;
+}
+
+.user_menu h4 {
+  margin: 0;
+}
+
+.dropbtn {
+  background-color: #60b0f4;
+  color: #D74E09;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #f39f2c;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #e8f3fd;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+  display: block;
+}
 
 .navigation_bar{
 	color: var(--header);
