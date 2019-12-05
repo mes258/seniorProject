@@ -113,4 +113,8 @@ Rails.application.configure do
 
 	config.secret_key_base = '6969FinalSeniorProject6969'
 
+  config.public_file_server.headers = {
+    'Cache-Control' => "no-cache"
+  }
+
 end
