@@ -1,5 +1,4 @@
 require 'aws-sdk'
-require 'csv'
 
 BUCKET_NAME = "mixnmatch-profiles"
 REGION = "us-west-2"
@@ -11,10 +10,13 @@ class ProfilesController < ApplicationController
 
 	def getCreds
     puts("set credentials")
-    CSV.read(CRED_PATH)
-    creds = CSV.read(CRED_PATH)
-    aws_id = creds[1][2]
-    aws_secret = creds[1][3]
+    aws_id = Rails.application.secrets.AWS_ID
+    aws_secret = Rails.application.secrets.AWS_SECRET
+    if aws_id == nil
+      puts("No ID")
+    else
+      puts(aws_id)
+    end
     Aws.config.update({
       credentials: Aws::Credentials.new(aws_id, aws_secret)
     })

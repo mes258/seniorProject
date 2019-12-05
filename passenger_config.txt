@@ -1,0 +1,27 @@
+ssh: ubuntu@34.221.97.48 --> admin on server
+
+ssh: mixnmatch@34.221.97.48 --> app-user on server
+
+pswd for app-user: 6969Never_Going_To_Use6969
+--> Don't use this, use ssh key
+
+dns: ec2-34-221-97-48.us-west-2.compute.amazonaws.com
+
+-- Key is the same.
+
+Tutorial:
+https://www.phusionpassenger.com/library/walkthroughs/deploy/ruby/aws/nginx/oss/xenial/deploy_app.html
+
+
+App is hosted at:
+/var/www/mixnmatch/
+
+Codebase:
+/var/www/mixnmatch/code/mixNMatch/
+
+*** Always pull code from mixnmatch user login, bc the code needs to be owned by that account ***
+--> to pull new code, just 'git pull' in /code/ folder
+--> then in /var/www/mixnmatch/code/mixNMatch/ run:
+    bundle install
+    bundle exec rake assets:precompile db:migrate RAILS_ENV=production
+    passenger-config restart-app $(pwd)
