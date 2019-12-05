@@ -106,10 +106,6 @@
 }
 
 .banner {
-	background-image: url(middle.png);
-	background-size: cover;
-	width: 100%;
-	background-repeat: no-repeat;
 	color: var(--header)
 }
 
@@ -123,11 +119,9 @@ h1 {
 
 footer {
 	text-align: center;
-	background-image: url(footer.png);
-	background-size: cover;
 	width: 100%;
-	background-repeat: no-repeat;
 	padding: 0% 0px 4% 0px;
+  background-color: var(--background);
 }
 
 footer ul {
