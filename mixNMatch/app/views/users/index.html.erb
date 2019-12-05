@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Leaderboard</h1>
+
+<table>
+<%place = 1%>
+<% @users.each do |user| %>
+  <tr>
+    <td><%=place%><%place += 1%></td>
+    <td><strong><%= user.score %></strong></td>
+    <td><%= user[:email].present? ? user[:email] : "User \##{user.id}"%><td>
+  </tr>
+<% end %>
+</table>

@@ -22,6 +22,10 @@ class UsersController < ApplicationController
         end
     end
 
+    def index
+        @users = User.all.sort_by{|u1| u1.score}.reverse
+    end
+
     private 
     def user_params
         params.require(:user).permit(:email, :password, :password_confirmation)
