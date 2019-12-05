@@ -1025,12 +1025,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-sdk
+  aws-sdk (~> 3.0.1)
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
-  font-awesome-rails
+  font-awesome-rails (~> 4.7.0.5)
   jbuilder (~> 2.7)
   listen (>= 3.0.5, < 3.2)
   passenger (>= 5.0.25)
