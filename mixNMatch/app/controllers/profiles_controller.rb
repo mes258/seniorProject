@@ -80,18 +80,18 @@ class ProfilesController < ApplicationController
     #                    (sorry for bad code duplication)
     #
     if(current_user.profile != nil)
-        all_profiles = Profile.where("active = TRUE AND id != ?", current_user.profile.id)
+        all_profiles = Profile.where("active = ? AND id != ?", true, current_user.profile.id)
     else
         all_profiles = Profile.all
     end
-    
+
     # choose a random profile to be matched
     if all_profiles.empty?
       @target_profile = new Profile()
     else
       @target_profile = all_profiles[srand % all_profiles.length]
     end
-    
+
     # get all compatible profiles
     @profiles = all_profiles.select{ |p| @target_profile.compatible p}
     @current_user = current_user
