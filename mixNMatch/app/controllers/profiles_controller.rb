@@ -82,11 +82,17 @@ class ProfilesController < ApplicationController
     else
         all_profiles = Profile.all
     end
+    
     # choose a random profile to be matched
-    @target_profile = all_profiles[srand % all_profiles.length]
+    if all_profiles.empty?
+      @target_profile = new Profile()
+    else
+      @target_profile = all_profiles[srand % all_profiles.length]
+    end
+    
     # get all compatible profiles
     @profiles = all_profiles.select{ |p| @target_profile.compatible p}
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user = current_user
   end
 
   # GET /profiles/1
