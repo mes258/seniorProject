@@ -100,7 +100,7 @@ class MatchesController < ApplicationController
 
 		    # choose a random profile to be matched
 		    if all_profiles.empty?
-		      @target_profile = new Profile()
+		      @target_profile = Profile.new()
 		    else
 		      @target_profile = all_profiles[srand % all_profiles.length]
 		    end
