@@ -3,3 +3,4 @@ git_rsa
 git_rsa.pub
 *.pem
 *.csv
+mixNMatch/config/secrets.yml
