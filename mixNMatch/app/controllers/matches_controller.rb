@@ -1,5 +1,5 @@
 class MatchesController < ApplicationController
-    
+
 
 
     def show
@@ -19,8 +19,8 @@ class MatchesController < ApplicationController
                 @otherProfile = @profile1
                 puts("should be profile 1")
             end
-        end 
-    end 
+        end
+    end
 
     def new
         @match = Match.new
@@ -34,7 +34,7 @@ class MatchesController < ApplicationController
         else
             match1 = []
             match2 = []
-        end 
+        end
         your_matches = match1 | match2
         @successful_matches = your_matches.select{|m| m.status1 == 1 and m.status2 ==1}
         @pending_response = match1.select{|m| m.status1 == 0} | match2.select{|m| m.status2 == 0}
@@ -88,19 +88,26 @@ class MatchesController < ApplicationController
             end
         else
             @match_status = "Sorry, your score is too low to create new matches"
-        end 
-        
+        end
+
         respond_to do |format|
             # SET UP NEW MATCH (set vars for profiles/index)
-            if(current_user.profile != nil)
-                all_profiles = Profile.where("active = TRUE AND id != ?", current_user.profile.id)
-            else
-                all_profiles = Profile.all
-            end             # choose a random profile to be matched
-            @target_profile = all_profiles[srand % all_profiles.length]
-            # get all compatible profiles
-            @profiles = all_profiles.select{ |p| @target_profile.compatible p}
-            @current_user ||= User.find(session[:user_id]) if session[:user_id]
+			if(current_user.profile != nil)
+		        all_profiles = Profile.where("active = ? AND id != ?", true, current_user.profile.id)
+		    else
+		        all_profiles = Profile.all
+		    end
+
+		    # choose a random profile to be matched
+		    if all_profiles.empty?
+		      @target_profile = new Profile()
+		    else
+		      @target_profile = all_profiles[srand % all_profiles.length]
+		    end
+
+		    # get all compatible profiles
+		    @profiles = all_profiles.select{ |p| @target_profile.compatible p}
+		    @current_user = current_user
             format.html { render "profiles/index" }
         end
 
@@ -122,7 +129,7 @@ class MatchesController < ApplicationController
             else
                 match1 = []
                 match2 = []
-            end 
+            end
             your_matches = match1 | match2
             @successful_matches = your_matches.select{|m| m.status1 == 1 and m.status2 ==1}
             @pending_response = match1.select{|m| m.status1 == 0} | match2.select{|m| m.status2 == 0}
@@ -133,4 +140,3 @@ class MatchesController < ApplicationController
         end
     end
 end
-
