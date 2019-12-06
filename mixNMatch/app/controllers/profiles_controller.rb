@@ -93,7 +93,10 @@ class ProfilesController < ApplicationController
     end
 
     # get all compatible profiles
-    @profiles = all_profiles.select{ |p| @target_profile.compatible p}
+    @profiles = all_profiles.select{ |p| @target_profile.compatible p}.shuffle
+    if(@profiles.length > 15){
+      @profiles = @profiles[0...15]
+    }
     @current_user = current_user
   end
 
